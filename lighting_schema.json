@@ -1,0 +1,196 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UE Lighting Configuration",
+  "description": "Structured lighting parameters extracted from a reference image, mapped to Unreal Engine settings",
+  "type": "object",
+  "required": ["directional_light", "sky_atmosphere", "sky_light", "post_process", "mood_metadata"],
+  "properties": {
+    "directional_light": {
+      "type": "object",
+      "description": "Primary directional light (sun/moon)",
+      "required": ["rotation_pitch", "rotation_yaw", "intensity_lux", "color_temperature_kelvin"],
+      "properties": {
+        "rotation_pitch": {
+          "type": "number",
+          "minimum": -90,
+          "maximum": 90,
+          "description": "Sun elevation angle in degrees. -90 = directly overhead, 0 = horizon, 90 = below horizon"
+        },
+        "rotation_yaw": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 360,
+          "description": "Sun azimuth angle in degrees"
+        },
+        "intensity_lux": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 120000,
+          "description": "Light intensity in lux. Sunny day ~100000, overcast ~10000, twilight ~1000, moonlight ~0.5"
+        },
+        "color_temperature_kelvin": {
+          "type": "number",
+          "minimum": 1500,
+          "maximum": 15000,
+          "description": "Color temperature in Kelvin. Candle ~1800, sunrise/set ~3000, noon ~5500, overcast ~7000, blue sky ~10000"
+        },
+        "light_source_angle": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 5,
+          "default": 0.5357,
+          "description": "Angular diameter of the light source in degrees. Affects shadow softness."
+        }
+      }
+    },
+    "sky_atmosphere": {
+      "type": "object",
+      "description": "Atmospheric scattering and sky appearance",
+      "properties": {
+        "rayleigh_scattering_scale": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 5,
+          "default": 1.0,
+          "description": "Rayleigh scattering multiplier. Higher = bluer sky, more orange sunsets"
+        },
+        "mie_scattering_scale": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 5,
+          "default": 1.0,
+          "description": "Mie scattering multiplier. Higher = more haze around the sun"
+        },
+        "absorption_scale": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 5,
+          "default": 1.0,
+          "description": "Ozone absorption multiplier"
+        }
+      }
+    },
+    "sky_light": {
+      "type": "object",
+      "description": "Ambient sky lighting",
+      "properties": {
+        "intensity_scale": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 10,
+          "default": 1.0,
+          "description": "Sky light intensity multiplier"
+        },
+        "tint": {
+          "type": "array",
+          "items": { "type": "number", "minimum": 0, "maximum": 1 },
+          "minItems": 3,
+          "maxItems": 3,
+          "description": "RGB tint for sky light [R, G, B] normalized 0-1"
+        }
+      }
+    },
+    "exponential_height_fog": {
+      "type": "object",
+      "description": "Atmospheric fog and haze",
+      "properties": {
+        "enabled": { "type": "boolean", "default": false },
+        "fog_density": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "default": 0.02
+        },
+        "fog_color": {
+          "type": "array",
+          "items": { "type": "number", "minimum": 0, "maximum": 1 },
+          "minItems": 3,
+          "maxItems": 3,
+          "description": "RGB fog color [R, G, B] normalized 0-1"
+        },
+        "fog_height_falloff": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 5,
+          "default": 0.2
+        },
+        "start_distance": {
+          "type": "number",
+          "minimum": 0,
+          "default": 0,
+          "description": "Distance from camera where fog begins (in cm)"
+        },
+        "volumetric_fog": { "type": "boolean", "default": false }
+      }
+    },
+    "post_process": {
+      "type": "object",
+      "description": "Post-processing overrides",
+      "properties": {
+        "exposure_compensation": {
+          "type": "number",
+          "minimum": -10,
+          "maximum": 10,
+          "default": 0
+        },
+        "bloom_intensity": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 8,
+          "default": 0.675
+        },
+        "white_balance_temp": {
+          "type": "number",
+          "minimum": 1500,
+          "maximum": 15000,
+          "default": 6500
+        },
+        "vignette_intensity": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "default": 0
+        },
+        "saturation": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 2,
+          "default": 1.0
+        },
+        "contrast": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 2,
+          "default": 1.0
+        }
+      }
+    },
+    "mood_metadata": {
+      "type": "object",
+      "description": "Human-readable metadata about the extracted mood",
+      "required": ["time_of_day", "mood"],
+      "properties": {
+        "time_of_day": {
+          "type": "string",
+          "enum": ["dawn", "sunrise", "morning", "noon", "afternoon", "golden_hour", "sunset", "blue_hour", "dusk", "night", "midnight"]
+        },
+        "mood": {
+          "type": "string",
+          "description": "Short mood description, e.g. 'warm_cinematic', 'cold_dramatic', 'soft_ethereal'"
+        },
+        "weather": {
+          "type": "string",
+          "enum": ["clear", "partly_cloudy", "overcast", "foggy", "rainy", "stormy", "snowy", "hazy"]
+        },
+        "indoor_outdoor": {
+          "type": "string",
+          "enum": ["outdoor", "indoor", "mixed"]
+        },
+        "description": {
+          "type": "string",
+          "description": "Brief natural language description of the lighting"
+        }
+      }
+    }
+  }
+}
