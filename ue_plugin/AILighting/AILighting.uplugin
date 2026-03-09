@@ -1,0 +1,19 @@
+{
+  "FileVersion": 3,
+  "Version": 1,
+  "VersionName": "0.1.0",
+  "FriendlyName": "AI Lighting",
+  "Description": "AI-powered lighting from reference images. Drop an image, get realistic lighting.",
+  "Category": "Lighting",
+  "CreatedBy": "AI Lighting Tools",
+  "EnabledByDefault": true,
+  "CanContainContent": true,
+  "Modules": [
+    {
+      "Name": "AILighting",
+      "Type": "Editor",
+      "LoadingPhase": "Default"
+    }
+  ],
+  "Plugins": []
+}
