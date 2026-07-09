@@ -47,9 +47,9 @@
 
     <Placemark>
       <name>4 · Damisetti Veera Badra Rao (S.No 6)</name>
-      <description>Veeravallipalem (V), Ainavilli Mandal, P Gannavaram, Konaseema — VILLAGE ESTIMATE (awaiting customer pin)</description>
-      <styleUrl>#estPin</styleUrl>
-      <Point><coordinates>82.050,16.550,0</coordinates></Point>
+      <description>Veeravallipalem (V), Ainavilli Mandal, P Gannavaram, Konaseema — EXACT pin shared by customer</description>
+      <styleUrl>#exactPin</styleUrl>
+      <Point><coordinates>82.002167,16.700194,0</coordinates></Point>
     </Placemark>
 
     <Placemark>
@@ -83,7 +83,7 @@
           81.754583,16.334917,0
           81.813736,16.708097,0
           81.951477,16.552273,0
-          82.050,16.550,0
+          82.002167,16.700194,0
           82.037399,16.968372,0
           82.166063,17.079937,0
           82.188454,17.135303,0
