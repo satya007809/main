@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>JSP Day 3 — Konaseema &amp; Central East Godavari (from Palakollu)</name>
+    <description>Field visit route for Day 3. Start: Palakollu (present location). 7 on-site customer visits in optimised serial order. Import this file into Google My Maps to see each customer's name on its pin.</description>
+
+    <Style id="startPin">
+      <IconStyle>
+        <color>ff2d9d0d</color>
+        <Icon><href>http://maps.google.com/mapfiles/kml/paddle/go.png</href></Icon>
+      </IconStyle>
+    </Style>
+    <Style id="stopPin">
+      <IconStyle>
+        <color>ff8899d0</color>
+        <Icon><href>http://maps.google.com/mapfiles/kml/paddle/red-circle.png</href></Icon>
+      </IconStyle>
+    </Style>
+    <Style id="routeLine">
+      <LineStyle>
+        <color>ff8899d0</color>
+        <width>4</width>
+      </LineStyle>
+    </Style>
+
+    <Placemark>
+      <name>START · Palakollu (Present location)</name>
+      <description>Journey start point — West Godavari</description>
+      <styleUrl>#startPin</styleUrl>
+      <Point><coordinates>81.733,16.517,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>1 · Gundubogula Durga Prasad (S.No 9)</name>
+      <description>Antarvedi, Sakhinetipalli Mandal, Konaseema, East Godavari</description>
+      <styleUrl>#stopPin</styleUrl>
+      <Point><coordinates>81.730,16.320,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>2 · Perabattula Venkata Ratnam (S.No 22)</name>
+      <description>2-54/1A, Vakagaruvu, Ambajipeta Mandal, Konaseema 533218</description>
+      <styleUrl>#stopPin</styleUrl>
+      <Point><coordinates>82.000,16.520,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>3 · Damisetti Veera Badra Rao (S.No 6)</name>
+      <description>Veeravallipalem (V), Ainavilli Mandal, P Gannavaram, Konaseema</description>
+      <styleUrl>#stopPin</styleUrl>
+      <Point><coordinates>82.050,16.550,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>4 · Vegirowthu Venkateswararao (S.No 25)</name>
+      <description>D.No 3-45, Pallavaripalem, Mummidivaram Mandal, Konaseema 533216</description>
+      <styleUrl>#stopPin</styleUrl>
+      <Point><coordinates>82.120,16.650,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>5 · Pandranki Srinivasarao (S.No 20)</name>
+      <description>Biccavolu Mandal, Anaparthy, East Godavari</description>
+      <styleUrl>#stopPin</styleUrl>
+      <Point><coordinates>82.100,16.950,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>6 · Relangi Sai Bhooloka (S.No 23)</name>
+      <description>Ramesavaram, Pedapudi Mandal, Pithapuram, Kakinada</description>
+      <styleUrl>#stopPin</styleUrl>
+      <Point><coordinates>82.220,16.950,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>7 · Pennada Arjunrao (S.No 21)</name>
+      <description>G Rangampeta village, Peddapuram Mandal, East Godavari</description>
+      <styleUrl>#stopPin</styleUrl>
+      <Point><coordinates>82.130,17.080,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 3 route line</name>
+      <styleUrl>#routeLine</styleUrl>
+      <LineString>
+        <tessellate>1</tessellate>
+        <coordinates>
+          81.733,16.517,0
+          81.730,16.320,0
+          82.000,16.520,0
+          82.050,16.550,0
+          82.120,16.650,0
+          82.100,16.950,0
+          82.220,16.950,0
+          82.130,17.080,0
+        </coordinates>
+      </LineString>
+    </Placemark>
+
+  </Document>
+</kml>
