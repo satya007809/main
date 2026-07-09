@@ -39,9 +39,9 @@
 
     <Placemark>
       <name>2 · Perabattula Venkata Ratnam (S.No 22)</name>
-      <description>2-54/1A, Vakagaruvu, Ambajipeta Mandal, Konaseema 533218</description>
+      <description>2-54/1A, Vakagaruvu, Ambajipeta Mandal, Konaseema 533218 — EXACT pin shared via WhatsApp</description>
       <styleUrl>#stopPin</styleUrl>
-      <Point><coordinates>82.000,16.520,0</coordinates></Point>
+      <Point><coordinates>81.951477,16.552273,0</coordinates></Point>
     </Placemark>
 
     <Placemark>
@@ -87,7 +87,7 @@
         <coordinates>
           81.733,16.517,0
           81.730,16.320,0
-          82.000,16.520,0
+          81.951477,16.552273,0
           82.050,16.550,0
           82.120,16.650,0
           82.100,16.950,0
