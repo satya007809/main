@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2">
   <Document>
-    <name>JSP Day 3 — West-to-East sweep (from Palakollu)</name>
-    <description>Day 3 field visits, reordered west-to-east so the drive never doubles back. Start: Palakollu. 5 of 7 pins are exact customer-shared locations; Damisetti (4) and Antarvedi (1) are village estimates. Import into Google My Maps to see customer names on each pin.</description>
+    <name>JSP Day 3 — South-to-North sweep (from Palakollu)</name>
+    <description>Day 3 field visits, ordered south-to-north so the drive never doubles back. Start: Palakollu. All 7 pins are exact customer-shared locations. One Godavari crossing at the start into Konaseema, then steadily north into East Godavari. Import into Google My Maps to see customer names on each pin.</description>
 
     <Style id="startPin">
       <IconStyle><color>ff2d9d0d</color><Icon><href>http://maps.google.com/mapfiles/kml/paddle/go.png</href></Icon></IconStyle>
     </Style>
     <Style id="exactPin">
       <IconStyle><color>ff1e9e1e</color><Icon><href>http://maps.google.com/mapfiles/kml/paddle/red-circle.png</href></Icon></IconStyle>
-    </Style>
-    <Style id="estPin">
-      <IconStyle><color>ff3399ff</color><Icon><href>http://maps.google.com/mapfiles/kml/paddle/ylw-circle.png</href></Icon></IconStyle>
     </Style>
     <Style id="routeLine">
       <LineStyle><color>ff8899d0</color><width>4</width></LineStyle>
@@ -32,17 +29,17 @@
     </Placemark>
 
     <Placemark>
-      <name>2 · Vegirowthu Venkateswararao (S.No 25)</name>
-      <description>Near Tanuku / Undrajavaram, West Godavari — EXACT pin shared by customer</description>
-      <styleUrl>#exactPin</styleUrl>
-      <Point><coordinates>81.813736,16.708097,0</coordinates></Point>
-    </Placemark>
-
-    <Placemark>
-      <name>3 · Perabattula Venkata Ratnam (S.No 22)</name>
+      <name>2 · Perabattula Venkata Ratnam (S.No 22)</name>
       <description>2-54/1A, Vakagaruvu, Ambajipeta Mandal, Konaseema 533218 — EXACT pin shared by customer</description>
       <styleUrl>#exactPin</styleUrl>
       <Point><coordinates>81.951477,16.552273,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>3 · Vegirowthu Venkateswararao (S.No 25)</name>
+      <description>Pallavaripalem, Mummidivaram Mandal, Konaseema 533216 — EXACT pin shared by customer</description>
+      <styleUrl>#exactPin</styleUrl>
+      <Point><coordinates>82.106857,16.642124,0</coordinates></Point>
     </Placemark>
 
     <Placemark>
@@ -81,8 +78,8 @@
         <coordinates>
           81.733,16.517,0
           81.754583,16.334917,0
-          81.813736,16.708097,0
           81.951477,16.552273,0
+          82.106857,16.642124,0
           82.002167,16.700194,0
           82.037399,16.968372,0
           82.166063,17.079937,0
