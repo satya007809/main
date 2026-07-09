@@ -26,9 +26,9 @@
 
     <Placemark>
       <name>1 · Gundubogula Durga Prasad (S.No 9)</name>
-      <description>Antarvedi, Sakhinetipalli Mandal, Konaseema — VILLAGE ESTIMATE (confirm exact pin)</description>
-      <styleUrl>#estPin</styleUrl>
-      <Point><coordinates>81.730,16.320,0</coordinates></Point>
+      <description>Antarvedi, Sakhinetipalli Mandal, Konaseema — EXACT pin shared by customer</description>
+      <styleUrl>#exactPin</styleUrl>
+      <Point><coordinates>81.754583,16.334917,0</coordinates></Point>
     </Placemark>
 
     <Placemark>
@@ -80,7 +80,7 @@
         <tessellate>1</tessellate>
         <coordinates>
           81.733,16.517,0
-          81.730,16.320,0
+          81.754583,16.334917,0
           81.813736,16.708097,0
           81.951477,16.552273,0
           82.050,16.550,0
