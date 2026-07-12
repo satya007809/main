@@ -55,10 +55,10 @@
     </Placemark>
 
     <Placemark>
-      <name>5 ⧗ Gulivindala Lakshman (S.No 26) — Vizag, call ahead</name>
-      <description>Nakkavanipalem, Visakhapatnam — approx pin, customer not yet answering. Do on arrival in Vizag if he calls back; otherwise reach the Vizag hotel and pick him up tomorrow.</description>
-      <styleUrl>#floatPin</styleUrl>
-      <Point><coordinates>83.300000,17.730000,0</coordinates></Point>
+      <name>5 · Gulivindala Lakshman (S.No 26)</name>
+      <description>Nakkavanipalem, Visakhapatnam — EXACT pin shared by customer (confirmed)</description>
+      <styleUrl>#exactPin</styleUrl>
+      <Point><coordinates>83.323822,17.746307,0</coordinates></Point>
     </Placemark>
 
     <Placemark>
@@ -79,7 +79,7 @@
           82.820953,17.657658,0
           82.861565,17.755236,0
           83.021027,17.559681,0
-          83.300000,17.730000,0
+          83.323822,17.746307,0
         </coordinates>
       </LineString>
     </Placemark>
