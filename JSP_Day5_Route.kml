@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2">
   <Document>
-    <name>JSP Day 5 — Anakapalle rural cluster (from Kakinada)</name>
-    <description>Day 5 field visits. Start: Kakinada (Hotel Sitara Elite). 4 confirmed rural cases in a clean loop around Anakapalle, resting at Anakapalle. Gulivindala (S.No 26, Vizag) is unconfirmed / not answering — shown as a float pin to pick up on the Day 6 Vizag leg. Import into Google My Maps for named pins.</description>
+    <name>JSP Day 5 — Kakinada to Vizag via Anakapalle cluster</name>
+    <description>Day 5 field visits. Start: Kakinada (Hotel Sitara Elite). 4 confirmed rural cases through the Anakapalle cluster, then push east to Visakhapatnam for the night. Gulivindala (S.No 26, Vizag) is stop 5 if he answers — approx pin, call ahead. Import into Google My Maps for named pins.</description>
 
     <Style id="startPin">
       <IconStyle><color>ff2d9d0d</color><Icon><href>http://maps.google.com/mapfiles/kml/paddle/go.png</href></Icon></IconStyle>
@@ -55,17 +55,17 @@
     </Placemark>
 
     <Placemark>
-      <name>🛏 REST · Anakapalle (overnight)</name>
-      <description>Your preferred rest base — central to the rural cluster, on NH-16</description>
-      <styleUrl>#hotelPin</styleUrl>
-      <Point><coordinates>82.998700,17.691300,0</coordinates></Point>
+      <name>5 ⧗ Gulivindala Lakshman (S.No 26) — Vizag, call ahead</name>
+      <description>Nakkavanipalem, Visakhapatnam — approx pin, customer not yet answering. Do on arrival in Vizag if he calls back; otherwise reach the Vizag hotel and pick him up tomorrow.</description>
+      <styleUrl>#floatPin</styleUrl>
+      <Point><coordinates>83.300000,17.730000,0</coordinates></Point>
     </Placemark>
 
     <Placemark>
-      <name>⧗ FLOAT · Gulivindala Lakshman (S.No 26) — Vizag, unconfirmed</name>
-      <description>Nakkavanipalem, Visakhapatnam — approx pin only, customer not answering. Pick up on the Day 6 Vizag leg, not part of today's loop.</description>
-      <styleUrl>#floatPin</styleUrl>
-      <Point><coordinates>83.300000,17.730000,0</coordinates></Point>
+      <name>🛏 REST · Visakhapatnam (overnight)</name>
+      <description>Tonight's stay — best hotels, and forward-positioned for Day 6 (Vizianagaram / Srikakulam)</description>
+      <styleUrl>#hotelPin</styleUrl>
+      <Point><coordinates>83.301600,17.721200,0</coordinates></Point>
     </Placemark>
 
     <Placemark>
@@ -79,7 +79,7 @@
           82.820953,17.657658,0
           82.861565,17.755236,0
           83.021027,17.559681,0
-          82.998700,17.691300,0
+          83.300000,17.730000,0
         </coordinates>
       </LineString>
     </Placemark>
