@@ -2,7 +2,7 @@
 <kml xmlns="http://www.opengis.net/kml/2.2">
   <Document>
     <name>JSP Day 5 — Kakinada to Vizag via Anakapalle cluster</name>
-    <description>Day 5 field visits. Start: Kakinada (Hotel Sitara Elite). 4 confirmed rural cases through the Anakapalle cluster, then push east to Visakhapatnam for the night. Gulivindala (S.No 26, Vizag) is stop 5 if he answers — approx pin, call ahead. Import into Google My Maps for named pins.</description>
+    <description>Day 5 field visits. Start: Kakinada (Hotel Sitara Elite). 3 confirmed rural cases through the Anakapalle cluster, then push east to Visakhapatnam for the night. Gulivindala (S.No 26, Vizag) is stop 4 if he answers — approx pin, call ahead. Pampana (S.No 19) dropped — not home. Import into Google My Maps for named pins.</description>
 
     <Style id="startPin">
       <IconStyle><color>ff2d9d0d</color><Icon><href>http://maps.google.com/mapfiles/kml/paddle/go.png</href></Icon></IconStyle>
@@ -34,28 +34,21 @@
     </Placemark>
 
     <Placemark>
-      <name>2 · Pampana Aruna Kumar (S.No 19)</name>
-      <description>Charakam / Theeda, Kasimkota Mandal, Anakapalli 531031 — EXACT pin shared by customer</description>
-      <styleUrl>#exactPin</styleUrl>
-      <Point><coordinates>82.820953,17.657658,0</coordinates></Point>
-    </Placemark>
-
-    <Placemark>
-      <name>3 · Pacchikura Nagaraju (S.No 17)</name>
+      <name>2 · Pacchikura Nagaraju (S.No 17)</name>
       <description>Chinamadina village, Butchayyapeta Mandal, Anakapalli 531026 — EXACT pin shared by customer</description>
       <styleUrl>#exactPin</styleUrl>
       <Point><coordinates>82.861565,17.755236,0</coordinates></Point>
     </Placemark>
 
     <Placemark>
-      <name>4 · Doddi Rambabu (S.No 8)</name>
+      <name>3 · Doddi Rambabu (S.No 8)</name>
       <description>Maduthuru post, Atchutapuram Mandal, Anakapalli — EXACT pin shared by customer (resolves earlier Atchutapuram/Parwada ambiguity)</description>
       <styleUrl>#exactPin</styleUrl>
       <Point><coordinates>83.021027,17.559681,0</coordinates></Point>
     </Placemark>
 
     <Placemark>
-      <name>5 ⧗ Gulivindala Lakshman (S.No 26) — Vizag, call ahead</name>
+      <name>4 ⧗ Gulivindala Lakshman (S.No 26) — Vizag, call ahead</name>
       <description>Nakkavanipalem, Visakhapatnam — approx pin, customer not yet answering. Do on arrival in Vizag if he calls back; otherwise reach the Vizag hotel and pick him up tomorrow.</description>
       <styleUrl>#floatPin</styleUrl>
       <Point><coordinates>83.300000,17.730000,0</coordinates></Point>
@@ -76,7 +69,6 @@
         <coordinates>
           82.235150,16.954979,0
           82.883957,17.543797,0
-          82.820953,17.657658,0
           82.861565,17.755236,0
           83.021027,17.559681,0
           83.300000,17.730000,0
