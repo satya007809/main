@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>JSP Day 3 — South-to-North sweep (from Palakollu)</name>
+    <description>Day 3 field visits, ordered south-to-north so the drive never doubles back. Start: Palakollu. All 7 pins are exact customer-shared locations. One Godavari crossing at the start into Konaseema, then steadily north into East Godavari. Import into Google My Maps to see customer names on each pin.</description>
+
+    <Style id="startPin">
+      <IconStyle><color>ff2d9d0d</color><Icon><href>http://maps.google.com/mapfiles/kml/paddle/go.png</href></Icon></IconStyle>
+    </Style>
+    <Style id="exactPin">
+      <IconStyle><color>ff1e9e1e</color><Icon><href>http://maps.google.com/mapfiles/kml/paddle/red-circle.png</href></Icon></IconStyle>
+    </Style>
+    <Style id="routeLine">
+      <LineStyle><color>ff8899d0</color><width>4</width></LineStyle>
+    </Style>
+
+    <Placemark>
+      <name>START · Palakollu (Present location)</name>
+      <description>Journey start point — West Godavari</description>
+      <styleUrl>#startPin</styleUrl>
+      <Point><coordinates>81.733,16.517,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>1 · Gundubogula Durga Prasad (S.No 9)</name>
+      <description>Antarvedi, Sakhinetipalli Mandal, Konaseema — EXACT pin shared by customer</description>
+      <styleUrl>#exactPin</styleUrl>
+      <Point><coordinates>81.754583,16.334917,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>2 · Perabattula Venkata Ratnam (S.No 22)</name>
+      <description>2-54/1A, Vakagaruvu, Ambajipeta Mandal, Konaseema 533218 — EXACT pin shared by customer</description>
+      <styleUrl>#exactPin</styleUrl>
+      <Point><coordinates>81.951477,16.552273,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>3 · Vegirowthu Venkateswararao (S.No 25)</name>
+      <description>Pallavaripalem, Mummidivaram Mandal, Konaseema 533216 — EXACT pin shared by customer</description>
+      <styleUrl>#exactPin</styleUrl>
+      <Point><coordinates>82.106857,16.642124,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>4 · Damisetti Veera Badra Rao (S.No 6)</name>
+      <description>Veeravallipalem (V), Ainavilli Mandal, P Gannavaram, Konaseema — EXACT pin shared by customer</description>
+      <styleUrl>#exactPin</styleUrl>
+      <Point><coordinates>82.002167,16.700194,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>5 · Pandranki Srinivasarao (S.No 20)</name>
+      <description>Biccavolu Mandal, Anaparthy, East Godavari — EXACT pin shared by customer</description>
+      <styleUrl>#exactPin</styleUrl>
+      <Point><coordinates>82.037399,16.968372,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>6 · Pennada Arjunrao (S.No 21)</name>
+      <description>G Ragampeta (Sri Subramanyeswara temple), Peddapuram Mandal, East Godavari 533437 — EXACT pin from shared Google Maps link</description>
+      <styleUrl>#exactPin</styleUrl>
+      <Point><coordinates>82.166063,17.079937,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>7 · Relangi Sai Bhooloka (S.No 23)</name>
+      <description>Ramesavaram, Pedapudi Mandal, Pithapuram, Kakinada — EXACT pin shared by customer</description>
+      <styleUrl>#exactPin</styleUrl>
+      <Point><coordinates>82.188454,17.135303,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 3 route line</name>
+      <styleUrl>#routeLine</styleUrl>
+      <LineString>
+        <tessellate>1</tessellate>
+        <coordinates>
+          81.733,16.517,0
+          81.754583,16.334917,0
+          81.951477,16.552273,0
+          82.106857,16.642124,0
+          82.002167,16.700194,0
+          82.037399,16.968372,0
+          82.166063,17.079937,0
+          82.188454,17.135303,0
+        </coordinates>
+      </LineString>
+    </Placemark>
+
+  </Document>
+</kml>

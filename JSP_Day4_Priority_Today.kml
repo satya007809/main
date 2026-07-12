@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>JSP Day 4 — Priority run today (from Samalkota)</name>
+    <description>Today: 2 priority cases (Atukuri, Vegirouthu Suresh) plus the 3 delta-interior cases near them (Adimula, Kappala, Guttula). Deferred to next week's Vizag->Hyderabad NH-16 return: Chody (Rajahmundry) and Kasula (Tadepalligudem). Ends at Kakinada for Day 5 (Visakhapatnam). All pins exact. Import into Google My Maps for named pins.</description>
+
+    <Style id="startPin">
+      <IconStyle><color>ff2d9d0d</color><Icon><href>http://maps.google.com/mapfiles/kml/paddle/go.png</href></Icon></IconStyle>
+    </Style>
+    <Style id="priorityPin">
+      <IconStyle><color>ff0000ff</color><scale>1.2</scale><Icon><href>http://maps.google.com/mapfiles/kml/paddle/red-stars.png</href></Icon></IconStyle>
+    </Style>
+    <Style id="addonPin">
+      <IconStyle><color>ff1e9e1e</color><Icon><href>http://maps.google.com/mapfiles/kml/paddle/grn-circle.png</href></Icon></IconStyle>
+    </Style>
+    <Style id="hotelPin">
+      <IconStyle><color>ff00a5ff</color><Icon><href>http://maps.google.com/mapfiles/kml/shapes/lodging.png</href></Icon></IconStyle>
+    </Style>
+    <Style id="routeLine">
+      <LineStyle><color>ff8899d0</color><width>4</width></LineStyle>
+    </Style>
+
+    <Placemark>
+      <name>START · Samalkota Railway Station</name>
+      <styleUrl>#startPin</styleUrl>
+      <Point><coordinates>82.170600,17.052400,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>1 ★ Atukuri Suresh Babu (S.No 41) — PRIORITY</name>
+      <description>Gowripatnam Village, Devarapalli Mandal (FIR 75/2026, complainant Navya 9014443525) — EXACT pin</description>
+      <styleUrl>#priorityPin</styleUrl>
+      <Point><coordinates>81.618972,17.034694,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>2 · Adimula Venkateswara Rao (S.No 1)</name>
+      <description>Thurupuvipparru village, Iragavaram Mandal, Tanuku, West Godavari — EXACT pin (~11 km from Vegirouthu)</description>
+      <styleUrl>#addonPin</styleUrl>
+      <Point><coordinates>81.733417,16.724833,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>3 ★ Vegirouthu Suresh (S.No 42) — PRIORITY</name>
+      <description>Ethakota / Ravulapalem Mandal (Avanti Frozen Foods, Emp 50149) — EXACT pin, family waiting</description>
+      <styleUrl>#priorityPin</styleUrl>
+      <Point><coordinates>81.813750,16.708111,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>4 · Kappala Krupanadham (S.No 11)</name>
+      <description>Baduguvanilanka, Alamuru Mandal, Kothapeta, East Godavari — EXACT pin (~19 km from Vegirouthu)</description>
+      <styleUrl>#addonPin</styleUrl>
+      <Point><coordinates>81.827694,16.839139,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>5 · Guttula Veera Venkata Prasad (S.No 35)</name>
+      <description>Venkatayapalem, Ramachandrapuram Mandal, Konaseema 533262 — EXACT pin (~35 km from Vegirouthu, on the way to Kakinada)</description>
+      <styleUrl>#addonPin</styleUrl>
+      <Point><coordinates>82.058528,16.771528,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>🛏 Overnight · Kakinada (for Day 5 Visakhapatnam)</name>
+      <styleUrl>#hotelPin</styleUrl>
+      <Point><coordinates>82.247000,16.989000,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Today priority route line</name>
+      <styleUrl>#routeLine</styleUrl>
+      <LineString>
+        <tessellate>1</tessellate>
+        <coordinates>
+          82.170600,17.052400,0
+          81.618972,17.034694,0
+          81.733417,16.724833,0
+          81.813750,16.708111,0
+          81.827694,16.839139,0
+          82.058528,16.771528,0
+          82.247000,16.989000,0
+        </coordinates>
+      </LineString>
+    </Placemark>
+
+  </Document>
+</kml>

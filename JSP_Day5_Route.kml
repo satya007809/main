@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>JSP Day 5 — Kakinada to Vizag via Anakapalle cluster</name>
+    <description>Day 5 field visits. Start: Kakinada (Hotel Sitara Elite). 4 confirmed rural cases through the Anakapalle cluster, then push east to Visakhapatnam for the night. Gulivindala (S.No 26, Vizag) is stop 5 if he answers — approx pin, call ahead. Kalimi Devatha (S.No 10) dropped — documents by courier. Import into Google My Maps for named pins.</description>
+
+    <Style id="startPin">
+      <IconStyle><color>ff2d9d0d</color><Icon><href>http://maps.google.com/mapfiles/kml/paddle/go.png</href></Icon></IconStyle>
+    </Style>
+    <Style id="exactPin">
+      <IconStyle><color>ff1e9e1e</color><Icon><href>http://maps.google.com/mapfiles/kml/paddle/red-circle.png</href></Icon></IconStyle>
+    </Style>
+    <Style id="floatPin">
+      <IconStyle><color>ff3399ff</color><Icon><href>http://maps.google.com/mapfiles/kml/paddle/ylw-stars.png</href></Icon></IconStyle>
+    </Style>
+    <Style id="hotelPin">
+      <IconStyle><color>ff00a5ff</color><scale>1.1</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/lodging.png</href></Icon></IconStyle>
+    </Style>
+    <Style id="routeLine">
+      <LineStyle><color>ff8899d0</color><width>4</width></LineStyle>
+    </Style>
+
+    <Placemark>
+      <name>START · Kakinada (Hotel Sitara Elite)</name>
+      <styleUrl>#startPin</styleUrl>
+      <Point><coordinates>82.235150,16.954979,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>1 · Bandi Apparao (S.No 12)</name>
+      <description>Yelamanchili Mandal, Visakhapatnam — EXACT pin shared by customer (resolves earlier blank address)</description>
+      <styleUrl>#exactPin</styleUrl>
+      <Point><coordinates>82.883957,17.543797,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>2 · Pampana Aruna Kumar (S.No 19)</name>
+      <description>Charakam / Theeda, Kasimkota Mandal, Anakapalli 531031 — EXACT pin shared by customer (confirmed home)</description>
+      <styleUrl>#exactPin</styleUrl>
+      <Point><coordinates>82.820953,17.657658,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>3 · Pacchikura Nagaraju (S.No 17)</name>
+      <description>Chinamadina village, Butchayyapeta Mandal, Anakapalli 531026 — EXACT pin shared by customer</description>
+      <styleUrl>#exactPin</styleUrl>
+      <Point><coordinates>82.861565,17.755236,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>4 · Doddi Rambabu (S.No 8)</name>
+      <description>Maduthuru post, Atchutapuram Mandal, Anakapalli — EXACT pin shared by customer (resolves earlier Atchutapuram/Parwada ambiguity)</description>
+      <styleUrl>#exactPin</styleUrl>
+      <Point><coordinates>83.021027,17.559681,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>5 · Gulivindala Lakshman (S.No 26)</name>
+      <description>HB Colony Road, Maddilapalem (near LV Prasad Eye Institute / Medicover), Visakhapatnam — EXACT pin confirmed from customer screenshot</description>
+      <styleUrl>#exactPin</styleUrl>
+      <Point><coordinates>83.323822,17.746307,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>🛏 REST · Visakhapatnam (overnight)</name>
+      <description>Tonight's stay — best hotels, and forward-positioned for Day 6 (Vizianagaram / Srikakulam)</description>
+      <styleUrl>#hotelPin</styleUrl>
+      <Point><coordinates>83.301600,17.721200,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 5 route line</name>
+      <styleUrl>#routeLine</styleUrl>
+      <LineString>
+        <tessellate>1</tessellate>
+        <coordinates>
+          82.235150,16.954979,0
+          82.883957,17.543797,0
+          82.820953,17.657658,0
+          82.861565,17.755236,0
+          83.021027,17.559681,0
+          83.323822,17.746307,0
+        </coordinates>
+      </LineString>
+    </Placemark>
+
+  </Document>
+</kml>
