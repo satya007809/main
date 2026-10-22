@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "maya-mcp": {
+      "command": "python",
+      "args": ["${CLAUDE_PLUGIN_ROOT}/mcp/maya_mcp_server.py"],
+      "env": {
+        "MAYA_BRIDGE_HOST": "127.0.0.1",
+        "MAYA_BRIDGE_PORT": "7005"
+      }
+    }
+  }
+}
