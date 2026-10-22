@@ -1,0 +1,12 @@
+{
+  "name": "maya-animator",
+  "description": "Animate anything in Autodesk Maya from Claude Code. Ships a live Maya bridge (maya-mcp MCP server), a distilled Animator's Survival Kit knowledge skill (timing, spacing, walks, runs, weight, anticipation, overlap, takes, dialogue, quadrupeds) and a Maya animation workflow skill (rig discovery, blocking, breakdowns, polish, playblast).",
+  "version": "0.1.0",
+  "author": {
+    "name": "Satyanarayana",
+    "url": "https://github.com/satya007809"
+  },
+  "repository": "https://github.com/satya007809/main",
+  "license": "MIT",
+  "keywords": ["maya", "animation", "keyframes", "walk-cycle", "animators-survival-kit", "mcp"]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "satya-film-tools",
+  "owner": {
+    "name": "Satyanarayana",
+    "url": "https://github.com/satya007809"
+  },
+  "plugins": [
+    {
+      "name": "maya-animator",
+      "description": "Claude animates creatures, characters and objects in Autodesk Maya using the craft of The Animator's Survival Kit — timing charts, walks, runs, weight, anticipation, overlap — through a live Maya bridge (maya-mcp).",
+      "source": "./plugins/maya-animator",
+      "category": "animation",
+      "keywords": ["maya", "animation", "keyframe", "walk cycle", "richard williams", "mcp"]
+    }
+  ]
+}
