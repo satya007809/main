@@ -50,7 +50,8 @@ Copy `backend/.env.example` to `backend/.env` and fill in. Key items:
 | `BID_PUBLIC_BASE_URL` | Public HTTPS URL of the API (used for OAuth redirects) |
 | `BID_JWT_SECRET` | ≥ 32 random characters |
 | `BID_DATA_ENCRYPTION_KEY` | `python -m app.cli gen-key`. **Back it up** – without it stored files cannot be decrypted |
-| `ANTHROPIC_API_KEY` | Server only. Never in the iOS app |
+| `BID_AI_MODE` | `claude_code` (use your Claude plan via Claude Code – see `CLAUDE_CODE_MODE.md`) or `api` |
+| `ANTHROPIC_API_KEY` | Only for `api` mode. Server only, never in the iOS app |
 | `BID_AI_MODEL` / `BID_AI_DIGEST_MODEL` / `BID_AI_EFFORT` | Default `claude-opus-5-5`, effort `high` |
 | `BID_GOOGLE_CLIENT_ID` / `_SECRET` | Google OAuth web client |
 | `BID_MICROSOFT_CLIENT_ID` / `_SECRET` | Optional OneDrive |

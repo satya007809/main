@@ -307,6 +307,9 @@ def delete_note(note_id: str, user: User = Depends(current_user), db: Session = 
 @router.post("/cases/{case_id}/analyses", response_model=JobOut, status_code=202)
 def start_analysis(case_id: str, user: User = Depends(current_user), db: Session = Depends(get_db)):
     case = owned_case(case_id, user, db)
+    if get_settings().ai_mode == "claude_code":
+        raise HTTPException(409, "This server runs investigations in Claude Code (your Claude plan). "
+                                 "Open Claude Code and ask it to investigate this case.")
     pending = db.query(Document).filter(Document.case_id == case.id,
                                         Document.status.in_(["pending", "processing"])).count()
     if pending:

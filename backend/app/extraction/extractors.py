@@ -57,6 +57,11 @@ class Extraction:
 def _finalise(ex: Extraction) -> Extraction:
     if ex.status != "processed":
         return ex
+    waiting = [p.page_no for p in ex.pages if p.method == "pending_ocr"]
+    if waiting:
+        ex.status = "awaiting_reading"
+        ex.detail = f"{len(waiting)} scanned page(s)/image(s) to be read by Claude Code"
+        return ex
     if not ex.pages:
         ex.status, ex.detail = "unreadable", "No readable content found"
         return ex
@@ -228,6 +233,8 @@ def extract_image(data: bytes, ref: str) -> Extraction:
     ex = Extraction(metadata=meta, is_photo=o.is_photograph,
                     pages=[PageOut(1, o.text_original, o.text_english, o.method, ",".join(o.languages),
                                    o.visual_description, o.legible or o.is_photograph, label="image")])
+    if o.method == "pending_ocr":
+        return _finalise(ex)
     if not o.legible and not o.is_photograph:
         ex.status, ex.detail = "unreadable", o.notes or "Image text not legible"
     return ex

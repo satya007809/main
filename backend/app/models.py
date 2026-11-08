@@ -57,6 +57,18 @@ class RefreshSession(Base):
     device: Mapped[str] = mapped_column(String(255), default="")
 
 
+class AgentToken(Base):
+    """Long-lived token that lets the user's own Claude Code session call the API (Max-plan mode)."""
+    __tablename__ = "agent_tokens"
+    id: Mapped[str] = mapped_column(String(32), primary_key=True, default=new_id)
+    user_id: Mapped[str] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
+    name: Mapped[str] = mapped_column(String(128), default="Claude Code")
+    token_hash: Mapped[str] = mapped_column(String(128), unique=True)
+    revoked: Mapped[bool] = mapped_column(Boolean, default=False)
+    last_used_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+
+
 class ConnectorAccount(TimestampMixin, Base):
     """OAuth connection to a cloud provider. Tokens are Fernet-encrypted at rest."""
     __tablename__ = "connector_accounts"

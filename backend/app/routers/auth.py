@@ -1,3 +1,4 @@
+import secrets
 from datetime import datetime, timedelta, timezone
 
 from fastapi import APIRouter, Depends, HTTPException, Request
@@ -7,8 +8,8 @@ from sqlalchemy.orm import Session
 from ..audit import audit
 from ..config import get_settings
 from ..db import get_db
-from ..deps import client_ip, current_user
-from ..models import RefreshSession, User
+from ..deps import AGENT_PREFIX, client_ip, current_user
+from ..models import AgentToken, RefreshSession, User
 from ..schemas import LoginIn, ProfileIn, RefreshIn, RegisterIn, TokenOut, UserOut
 from ..security import create_access_token, hash_password, hash_token, new_refresh_token, verify_password
 
@@ -88,3 +89,34 @@ def update_me(body: ProfileIn, user: User = Depends(current_user), db: Session =
                                      if k in PROFILE_KEYS and v and v.strip()}
     db.commit()
     return user
+
+
+# ------------------------------------------------------------------ Claude Code access tokens
+@router.post("/agent-tokens")
+def create_agent_token(body: dict, request: Request, user: User = Depends(current_user),
+                       db: Session = Depends(get_db)):
+    """Create a token for the user's Claude Code session. Shown once; store it as an environment secret."""
+    if request.headers.get("authorization", "").split(" ")[-1].startswith(AGENT_PREFIX):
+        raise HTTPException(403, "Agent tokens cannot create other tokens")
+    raw = AGENT_PREFIX + secrets.token_urlsafe(40)
+    tok = AgentToken(user_id=user.id, name=str(body.get("name") or "Claude Code")[:128], token_hash=hash_token(raw))
+    db.add(tok)
+    audit(db, "auth.agent_token_created", user.id, name=tok.name)
+    db.commit()
+    return {"id": tok.id, "name": tok.name, "token": raw}
+
+
+@router.get("/agent-tokens")
+def list_agent_tokens(user: User = Depends(current_user), db: Session = Depends(get_db)):
+    return [{"id": t.id, "name": t.name, "created_at": t.created_at, "last_used_at": t.last_used_at}
+            for t in db.query(AgentToken).filter_by(user_id=user.id, revoked=False).order_by(AgentToken.created_at)]
+
+
+@router.delete("/agent-tokens/{token_id}")
+def revoke_agent_token(token_id: str, user: User = Depends(current_user), db: Session = Depends(get_db)):
+    tok = db.get(AgentToken, token_id)
+    if tok and tok.user_id == user.id:
+        tok.revoked = True
+        audit(db, "auth.agent_token_revoked", user.id, name=tok.name)
+        db.commit()
+    return {"ok": True}

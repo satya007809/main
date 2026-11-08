@@ -3,8 +3,10 @@ from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from sqlalchemy.orm import Session
 
 from .db import get_db
-from .models import Case, User
-from .security import decode_access_token
+from .models import AgentToken, Case, User, utcnow
+from .security import decode_access_token, hash_token
+
+AGENT_PREFIX = "bid_at_"
 
 bearer = HTTPBearer(auto_error=False)
 
@@ -12,7 +14,15 @@ bearer = HTTPBearer(auto_error=False)
 def current_user(creds: HTTPAuthorizationCredentials | None = Depends(bearer), db: Session = Depends(get_db)) -> User:
     if creds is None:
         raise HTTPException(status.HTTP_401_UNAUTHORIZED, "Not authenticated")
-    uid = decode_access_token(creds.credentials)
+    raw = creds.credentials
+    if raw.startswith(AGENT_PREFIX):
+        tok = db.query(AgentToken).filter_by(token_hash=hash_token(raw), revoked=False).first()
+        uid = tok.user_id if tok else None
+        if tok:
+            tok.last_used_at = utcnow()
+            db.commit()
+    else:
+        uid = decode_access_token(raw)
     user = db.get(User, uid) if uid else None
     if user is None or not user.is_active:
         raise HTTPException(status.HTTP_401_UNAUTHORIZED, "Invalid or expired token")

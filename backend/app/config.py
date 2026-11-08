@@ -29,13 +29,17 @@ class Settings(BaseSettings):
     max_zip_members: int = 2000
 
     # AI
+    # api          = this server calls the Claude API (pay per use, fully automatic)
+    # claude_code  = the server makes NO AI calls; analysis is done in Claude Code under the user's
+    #                Claude subscription (Max plan) via tools/bid_agent.py and the investigate-case skill
+    ai_mode: str = "api"
     anthropic_api_key: str = ""  # read by SDK from ANTHROPIC_API_KEY if empty
     ai_model: str = "claude-opus-5-5"
     ai_digest_model: str = "claude-opus-5-5"  # per-document digests; set claude-sonnet-5-5 to lower cost
     ai_effort: str = "high"
     ai_server_fallback: bool = True
     ai_max_case_chars: int = 600_000  # full-text budget passed to synthesis besides digests
-    ocr_engine: str = "claude_vision"  # claude_vision | tesseract | none
+    ocr_engine: str = "claude_vision"  # claude_vision | tesseract | deferred | none
     llm_provider: str = "anthropic"  # anthropic | fake (tests only)
 
     # Connectors

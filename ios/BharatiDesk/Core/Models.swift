@@ -384,6 +384,9 @@ struct Aspect: Codable, Identifiable, Hashable { let key: String; let name: Stri
 struct Connector: Codable, Identifiable, Hashable { let provider: String; let connected: Bool; let accountEmail: String; let configured: Bool; var id: String { provider } }
 struct AuthorizeResponse: Codable { let authorizeUrl: String; let callbackScheme: String }
 struct AuditEntry: Codable, Hashable { let at: String; let action: String }
+struct AppConfig: Codable { let aiMode: String }
+struct AgentTokenInfo: Codable, Identifiable, Hashable { let id: String; let name: String; let createdAt: String; let lastUsedAt: String? }
+struct NewAgentToken: Codable { let id: String; let name: String; let token: String }
 
 extension String {
     var humanized: String { replacingOccurrences(of: "_", with: " ").capitalized }

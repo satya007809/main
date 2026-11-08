@@ -27,6 +27,13 @@ report version is kept.
 | 2 – Investigation intelligence | PA Death, PA Injury, Theft, Fire, Road Accident and special-aspect playbooks, policy-clause analysis, multilingual OCR, evidence comparison | **Playbooks and engine features included**; need tuning against your real closed cases |
 | 3 – Production system | OneDrive, reference-format templates, invoices, history/audit, offline drafts, security hardening, TestFlight | **Implemented**; OneDrive connector not yet tested against a live account; deployment and TestFlight steps documented |
 
+## Two ways to run the AI
+
+* **Claude-plan mode** (`BID_AI_MODE=claude_code`, recommended if you already have Claude Max): no API
+  charges. You run the investigation in Claude Code with the bundled `investigate-case` skill, and the
+  server validates the results and builds the report. See `docs/CLAUDE_CODE_MODE.md`.
+* **API mode** (`BID_AI_MODE=api`): one tap in the app, billed per use through the Claude API.
+
 ## Quick start
 
 ```bash

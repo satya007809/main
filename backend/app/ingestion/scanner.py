@@ -26,7 +26,7 @@ from .filetypes import sniff
 
 log = logging.getLogger(__name__)
 FINAL_STATES = {"processed", "partial", "unreadable", "password_protected", "unsupported", "corrupted",
-                "duplicate", "container"}
+                "duplicate", "container", "awaiting_reading"}
 
 Progress = Callable[[float, str], None]
 
@@ -98,7 +98,7 @@ def ingest_bytes(db: Session, case: Case, doc: Document, data: bytes, filename: 
     dup = (db.query(Document)
            .filter(Document.case_id == case.id, Document.sha256 == doc.sha256, Document.id != doc.id,
                    Document.status.in_(["processed", "partial", "unreadable", "password_protected",
-                                        "unsupported", "corrupted"]))
+                                        "unsupported", "corrupted", "awaiting_reading"]))
            .order_by(Document.ref).first())
     if dup:
         doc.duplicate_of_id = dup.id

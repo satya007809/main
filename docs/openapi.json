@@ -253,6 +253,120 @@
     ]
    }
   },
+  "/api/v1/auth/agent-tokens": {
+   "get": {
+    "tags": [
+     "auth"
+    ],
+    "summary": "List Agent Tokens",
+    "operationId": "list_agent_tokens_api_v1_auth_agent_tokens_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   },
+   "post": {
+    "tags": [
+     "auth"
+    ],
+    "summary": "Create Agent Token",
+    "description": "Create a token for the user's Claude Code session. Shown once; store it as an environment secret.",
+    "operationId": "create_agent_token_api_v1_auth_agent_tokens_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "additionalProperties": true,
+        "type": "object",
+        "title": "Body"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/api/v1/auth/agent-tokens/{token_id}": {
+   "delete": {
+    "tags": [
+     "auth"
+    ],
+    "summary": "Revoke Agent Token",
+    "operationId": "revoke_agent_token_api_v1_auth_agent_tokens__token_id__delete",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "token_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Token Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
   "/api/v1/connectors": {
    "get": {
     "tags": [
@@ -2079,6 +2193,309 @@
     },
     "responses": {
      "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/v1/config": {
+   "get": {
+    "tags": [
+     "claude-code"
+    ],
+    "summary": "Config",
+    "operationId": "config_api_v1_config_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/api/v1/cases/{case_id}/analysis-package": {
+   "get": {
+    "tags": [
+     "claude-code"
+    ],
+    "summary": "Analysis Package",
+    "operationId": "analysis_package_api_v1_cases__case_id__analysis_package_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "case_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Case Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/v1/documents/{doc_id}/pages/{page_no}/image": {
+   "get": {
+    "tags": [
+     "claude-code"
+    ],
+    "summary": "Page Image",
+    "operationId": "page_image_api_v1_documents__doc_id__pages__page_no__image_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "doc_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Doc Id"
+      }
+     },
+     {
+      "name": "page_no",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "Page No"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/v1/documents/{doc_id}/pages/{page_no}/reading": {
+   "put": {
+    "tags": [
+     "claude-code"
+    ],
+    "summary": "Page Reading",
+    "operationId": "page_reading_api_v1_documents__doc_id__pages__page_no__reading_put",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "doc_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Doc Id"
+      }
+     },
+     {
+      "name": "page_no",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "Page No"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "type": "object",
+        "additionalProperties": true,
+        "title": "Body"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/v1/cases/{case_id}/analyses/import": {
+   "post": {
+    "tags": [
+     "claude-code"
+    ],
+    "summary": "Import Analysis",
+    "operationId": "import_analysis_api_v1_cases__case_id__analyses_import_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "case_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Case Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "type": "object",
+        "additionalProperties": true,
+        "title": "Body"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/v1/cases/{case_id}/reports/draft": {
+   "post": {
+    "tags": [
+     "claude-code"
+    ],
+    "summary": "Import Report Draft",
+    "operationId": "import_report_draft_api_v1_cases__case_id__reports_draft_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "case_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Case Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "type": "object",
+        "additionalProperties": true,
+        "title": "Body"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
       "description": "Successful Response",
       "content": {
        "application/json": {

@@ -4,6 +4,7 @@ from sqlalchemy import func
 from sqlalchemy.orm import Session
 
 from ..audit import audit
+from ..config import get_settings
 from ..connectors.base import ConnectorError
 from ..connectors.registry import get_connector
 from ..db import get_db
@@ -26,6 +27,9 @@ def _rout(rv: ReportVersion) -> ReportOut:
 @router.post("/cases/{case_id}/reports", response_model=JobOut, status_code=202)
 def create_report(case_id: str, body: ReportIn, user: User = Depends(current_user), db: Session = Depends(get_db)):
     case = owned_case(case_id, user, db)
+    if get_settings().ai_mode == "claude_code":
+        raise HTTPException(409, "Reports are drafted in Claude Code on this server. Ask Claude Code to "
+                                 "write the report for this case.")
     q = db.query(AnalysisRun).filter_by(case_id=case.id, status="completed")
     run = q.filter_by(id=body.analysis_run_id).first() if body.analysis_run_id else \
         q.order_by(AnalysisRun.run_no.desc()).first()

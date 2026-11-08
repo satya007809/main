@@ -10,6 +10,9 @@ final class AppSession {
     var isSignedIn = Keychain.get(.refreshToken) != nil
     var isLocked = false
     var lastError: String?
+    /// "api" (server calls Claude) or "claude_code" (investigation runs in Claude Code on the user's plan)
+    var aiMode: String = UserDefaults.standard.string(forKey: "aiMode") ?? "api"
+    var usesClaudeCode: Bool { aiMode == "claude_code" }
 
     var appLockEnabled: Bool {
         get { UserDefaults.standard.bool(forKey: "appLock") }
@@ -20,6 +23,10 @@ final class AppSession {
         do {
             user = try await APIClient.shared.request("GET", "auth/me")
             OfflineStore.shared.cache(user, as: "me.json")
+            if let cfg: AppConfig = try? await APIClient.shared.request("GET", "config") {
+                aiMode = cfg.aiMode
+                UserDefaults.standard.set(cfg.aiMode, forKey: "aiMode")
+            }
         } catch APIError.notSignedIn {
             isSignedIn = false
         } catch {

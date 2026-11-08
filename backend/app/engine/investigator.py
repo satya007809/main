@@ -97,13 +97,19 @@ def case_particulars(case: Case) -> dict:
             "additional_aspects": case.additional_aspects, "investigation_date": case.investigation_date}
 
 
-def build_evidence(db: Session, case: Case, digests: dict[str, dict]) -> tuple[list[dict], EvidenceIndex, list[str]]:
-    docs = sorted(case.documents, key=lambda d: d.ref)
-    notes = db.query(CaseNote).filter_by(case_id=case.id).order_by(CaseNote.ref).all()
-    idx = EvidenceIndex(
+def evidence_index(db: Session, case: Case) -> EvidenceIndex:
+    docs = case.documents
+    notes = db.query(CaseNote).filter_by(case_id=case.id).all()
+    return EvidenceIndex(
         docs={d.ref: d.page_count for d in docs if d.status in USABLE or d.status == "duplicate"},
         notes={n.ref: n.kind for n in notes},
         unusable_docs=[d.ref for d in docs if d.status in UNUSABLE])
+
+
+def build_evidence(db: Session, case: Case, digests: dict[str, dict]) -> tuple[list[dict], EvidenceIndex, list[str]]:
+    docs = sorted(case.documents, key=lambda d: d.ref)
+    notes = db.query(CaseNote).filter_by(case_id=case.id).order_by(CaseNote.ref).all()
+    idx = evidence_index(db, case)
     inventory = [_doc_header(d) | ({"duplicate_of": next((x.ref for x in docs if x.id == d.duplicate_of_id), "")}
                                    if d.status == "duplicate" else {}) for d in docs]
     note_list = [{"ref": n.ref, "kind": n.kind, "title": n.title, "body": n.body, "verified_by": n.verified_by,

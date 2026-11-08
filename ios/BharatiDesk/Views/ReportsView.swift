@@ -4,6 +4,8 @@ import UniformTypeIdentifiers
 @MainActor
 struct ReportsView: View {
     let model: CaseModel
+    @Environment(AppSession.self) private var session
+    @State private var showClaudeCode = false
     @State private var pageLimit = 7
     @State private var preview: FileItem?
     @State private var share: FileItem?
@@ -18,19 +20,31 @@ struct ReportsView: View {
             if let job = model.tracker.job, job.kind == "report", job.isActive {
                 Section { JobProgressCard(job: job) }.listRowInsets(EdgeInsets()).listRowBackground(Color.clear)
             }
-            Section {
-                Stepper("Page limit: \(pageLimit)", value: $pageLimit, in: 3...10)
-                Button {
-                    Task { await model.start("cases/\(model.caseId)/reports", body: ["page_limit": pageLimit]) }
-                } label: {
-                    Label(model.reports.isEmpty ? "Generate Word report" : "Regenerate report (new version)", systemImage: "doc.badge.gearshape")
+            if session.usesClaudeCode {
+                Section {
+                    Button { showClaudeCode = true } label: {
+                        Label(model.reports.isEmpty ? "Write report in Claude Code" : "Rewrite report in Claude Code (new version)",
+                              systemImage: "sparkles.rectangle.stack")
+                    }
+                    .disabled(!canGenerate)
+                } header: { Text("Generate") } footer: {
+                    Text("Claude Code drafts the text on your Claude plan; this server checks it and builds the Word file. New versions appear below – pull to refresh.")
                 }
-                .disabled(!canGenerate || model.tracker.job?.isActive == true)
-            } header: { Text("Generate") } footer: {
-                if let v = model.latest?.validation, !v.errors.isEmpty {
-                    Text("The latest analysis has validation errors. Rerun the investigation first.").foregroundStyle(.red)
-                } else {
-                    Text("Uses the latest investigation analysis (run #\(model.latest?.runNo ?? 0)). Earlier versions are kept.")
+            } else {
+                Section {
+                    Stepper("Page limit: \(pageLimit)", value: $pageLimit, in: 3...10)
+                    Button {
+                        Task { await model.start("cases/\(model.caseId)/reports", body: ["page_limit": pageLimit]) }
+                    } label: {
+                        Label(model.reports.isEmpty ? "Generate Word report" : "Regenerate report (new version)", systemImage: "doc.badge.gearshape")
+                    }
+                    .disabled(!canGenerate || model.tracker.job?.isActive == true)
+                } header: { Text("Generate") } footer: {
+                    if let v = model.latest?.validation, !v.errors.isEmpty {
+                        Text("The latest analysis has validation errors. Rerun the investigation first.").foregroundStyle(.red)
+                    } else {
+                        Text("Uses the latest investigation analysis (run #\(model.latest?.runNo ?? 0)). Earlier versions are kept.")
+                    }
                 }
             }
             ErrorBanner(message: error)
@@ -80,6 +94,9 @@ struct ReportsView: View {
         .overlay { if let busy { ProgressView(busy).padding().background(.regularMaterial, in: RoundedRectangle(cornerRadius: 12)) } }
         .onAppear { pageLimit = model.record?.pageLimit ?? 7 }
         .refreshable { await model.load() }
+        .sheet(isPresented: $showClaudeCode) {
+            if let c = model.record { ClaudeCodeHandoffView(record: c, reportOnly: true) }
+        }
         .sheet(item: $preview) { f in NavigationStack { QuickLookPreview(url: f.url).ignoresSafeArea() } }
         .sheet(item: $share) { f in ShareSheet(items: [f.url]).presentationDetents([.medium, .large]) }
         .fileExporter(isPresented: $showExporter, item: exportURL, contentTypes: [.data],

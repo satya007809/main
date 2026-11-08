@@ -12,6 +12,8 @@ struct SettingsView: View {
     @State private var error: String?
     @State private var saved = false
     @State private var lock = false
+    @State private var agentTokens: [AgentTokenInfo] = []
+    @State private var newToken: NewAgentToken?
 
     private let profileFields: [(String, String)] = [
         ("name", "Investigator name"), ("designation", "Designation"), ("firm", "Firm name"),
@@ -53,6 +55,28 @@ struct SettingsView: View {
                     Text("Read-only access to folders you open, plus permission to upload reports you choose to save back. Disconnecting revokes the app's access.")
                 }
 
+                if session.usesClaudeCode {
+                    Section {
+                        ForEach(agentTokens) { t in
+                            VStack(alignment: .leading) {
+                                Text(t.name)
+                                Text("Created \(t.createdAt.shortDate)" + (t.lastUsedAt.map { " · last used \($0.shortDate)" } ?? ""))
+                                    .font(.caption).foregroundStyle(.secondary)
+                            }
+                        }
+                        .onDelete { idx in
+                            let ids = idx.map { agentTokens[$0].id }
+                            Task {
+                                for id in ids { _ = try? await APIClient.shared.raw("DELETE", "auth/agent-tokens/\(id)") }
+                                await loadTokens()
+                            }
+                        }
+                        Button("Create access token") { Task { await createToken() } }
+                    } header: { Text("Claude Code access") } footer: {
+                        Text("Investigations run in Claude Code on your Claude plan. Save the token as a secret in your Claude Code environment (see docs/CLAUDE_CODE_MODE.md). Swipe to revoke.")
+                    }
+                }
+
                 Section("Security") {
                     Toggle("Require Face ID / passcode", isOn: $lock).onChange(of: lock) { _, v in session.appLockEnabled = v }
                     TextField("Server URL", text: $serverURL).textInputAutocapitalization(.never).keyboardType(.URL)
@@ -72,6 +96,12 @@ struct SettingsView: View {
                     Text("Signing out removes all cached case data from this iPhone.")
                 }
             }
+            .alert("Claude Code access token", isPresented: Binding(get: { newToken != nil }, set: { if !$0 { newToken = nil } })) {
+                Button("Copy token") { UIPasteboard.general.string = newToken?.token; newToken = nil }
+                Button("Close", role: .cancel) { newToken = nil }
+            } message: {
+                Text("Shown only once. Copy it now and save it as a secret in your Claude Code environment. Do not paste it into a chat.")
+            }
             .navigationTitle("Settings")
             .toolbar { ToolbarItem(placement: .confirmationAction) { Button("Done") { dismiss() } } }
             .task {
@@ -81,8 +111,21 @@ struct SettingsView: View {
                 profile = Dictionary((session.user?.investigatorProfile ?? [:]).map { ($0.key.snakeCased, $0.value) },
                                      uniquingKeysWith: { a, _ in a })
                 connectors = (try? await APIClient.shared.request("GET", "connectors")) ?? []
+                await loadTokens()
             }
         }
+    }
+
+    private func loadTokens() async {
+        guard session.usesClaudeCode else { return }
+        agentTokens = (try? await APIClient.shared.request("GET", "auth/agent-tokens")) ?? []
+    }
+
+    private func createToken() async {
+        do {
+            newToken = try await APIClient.shared.request("POST", "auth/agent-tokens", body: ["name": "Claude Code (iPhone)"])
+            await loadTokens()
+        } catch { self.error = error.localizedDescription }
     }
 
     private func saveProfile() async {

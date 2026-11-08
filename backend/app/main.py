@@ -11,7 +11,7 @@ from . import db as dbmod
 from .config import get_settings
 from .jobs.queue import WorkerThread
 from .playbooks.store import seed_defaults
-from .routers import auth, cases, connectors, reports
+from .routers import agent, auth, cases, connectors, reports
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
 API_PREFIX = "/api/v1"
@@ -64,7 +64,7 @@ def create_app() -> FastAPI:
     def health():
         return {"ok": True}
 
-    for r in (auth.router, connectors.router, cases.router, reports.router):
+    for r in (auth.router, connectors.router, cases.router, reports.router, agent.router):
         app.include_router(r, prefix=API_PREFIX)
     return app
 

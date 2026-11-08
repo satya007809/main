@@ -71,8 +71,10 @@ final class CaseModel {
 @MainActor
 struct CaseDetailView: View {
     @Environment(OfflineStore.self) private var offline
+    @Environment(AppSession.self) private var session
     @State private var model: CaseModel
     @State private var showEdit = false
+    @State private var showClaudeCode = false
     @State private var showFileImporter = false
     @State private var photoItems: [PhotosPickerItem] = []
 
@@ -105,6 +107,9 @@ struct CaseDetailView: View {
         .task { await model.load() }
         .onDisappear { model.tracker.stop() }
         .toolbar { ToolbarItem(placement: .topBarTrailing) { Button("Edit") { showEdit = true }.disabled(model.record == nil) } }
+        .sheet(isPresented: $showClaudeCode) {
+            if let c = model.record { ClaudeCodeHandoffView(record: c, reportOnly: false) }
+        }
         .sheet(isPresented: $showEdit) {
             if let c = model.record { EditCaseView(record: c) { updated in model.record = updated; showEdit = false } }
         }
@@ -144,12 +149,21 @@ struct CaseDetailView: View {
             NavigationLink { NotesView(model: model) } label: {
                 StepRow(n: 3, title: "Field notes & verification results", detail: "\(model.notes.count) recorded", done: !model.notes.isEmpty)
             }
-            Button { Task { await model.start("cases/\(model.caseId)/analyses") } } label: {
-                StepRow(n: 4, title: model.analyses.isEmpty ? "Run investigation" : "Rerun investigation with latest evidence",
-                        detail: model.latest.map { "Last run #\($0.runNo) · \($0.createdAt.shortDate)" } ?? "Applies the case playbook",
-                        done: model.latest != nil)
+            if session.usesClaudeCode {
+                Button { showClaudeCode = true } label: {
+                    StepRow(n: 4, title: model.analyses.isEmpty ? "Investigate in Claude Code" : "Rerun in Claude Code with latest evidence",
+                            detail: model.latest.map { "Last run #\($0.runNo) · \($0.createdAt.shortDate)" } ?? "Uses your Claude plan",
+                            done: model.latest != nil)
+                }
+                .disabled(busy || model.documents.isEmpty)
+            } else {
+                Button { Task { await model.start("cases/\(model.caseId)/analyses") } } label: {
+                    StepRow(n: 4, title: model.analyses.isEmpty ? "Run investigation" : "Rerun investigation with latest evidence",
+                            detail: model.latest.map { "Last run #\($0.runNo) · \($0.createdAt.shortDate)" } ?? "Applies the case playbook",
+                            done: model.latest != nil)
+                }
+                .disabled(busy || model.documents.isEmpty)
             }
-            .disabled(busy || model.documents.isEmpty)
             NavigationLink { FindingsView(model: model) } label: {
                 StepRow(n: 5, title: "Review findings", detail: model.latest?.result?.opinion.verdictTitle ?? "Not yet analysed",
                         done: model.latest != nil)

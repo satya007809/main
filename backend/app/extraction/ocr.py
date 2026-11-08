@@ -70,6 +70,9 @@ def _to_jpeg_b64(img: Image.Image, max_side: int = 2000) -> str:
 
 def ocr_image(img: Image.Image, context: str = "") -> OcrResult:
     engine = get_settings().ocr_engine
+    if get_settings().ai_mode == "claude_code" or engine == "deferred":
+        # Read later by Claude Code (page image is served by /documents/{id}/pages/{n}/image)
+        return OcrResult([], "", "", False, "", False, "Awaiting reading by Claude Code", "pending_ocr")
     if engine == "tesseract" and shutil.which("tesseract"):
         return _tesseract(img)
     if engine == "none":
