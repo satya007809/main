@@ -41,10 +41,10 @@ final class CaseModel {
             store.cache(notes, as: key("notes")); store.cache(latest, as: key("analysis"))
             store.cache(reports, as: key("reports"))
         } catch {
-            record = store.load(key("record")) ?? record
+            record = (store.load(key("record")) as CaseRecord?) ?? record
             documents = store.load(key("docs")) ?? documents
             notes = store.load(key("notes")) ?? notes
-            latest = store.load(key("analysis")) ?? latest
+            latest = (store.load(key("analysis")) as AnalysisRun?) ?? latest
             reports = store.load(key("reports")) ?? reports
             self.error = (error as? APIError)?.isOffline == true ? nil : error.localizedDescription
         }
@@ -58,13 +58,17 @@ final class CaseModel {
     }
 
     func track(_ job: Job) {
-        tracker.track(job) { [weak self] _ in Task { await self?.load() } }
+        tracker.track(job) { [weak self] _ in
+            guard let self else { return }
+            Task { await self.load() }
+        }
     }
 
     func document(ref: String) -> CaseDocument? { documents.first { $0.ref == ref } }
     func note(ref: String) -> CaseNote? { notes.first { $0.ref == ref } }
 }
 
+@MainActor
 struct CaseDetailView: View {
     @Environment(OfflineStore.self) private var offline
     @State private var model: CaseModel
@@ -271,7 +275,7 @@ struct EditCaseView: View {
         }
     }
 
-    static func invoice(from dict: [String: JSONValue]) -> Invoice {
+    nonisolated static func invoice(from dict: [String: JSONValue]) -> Invoice {
         guard let data = try? JSONEncoder().encode(dict), let inv = try? JSONDecoder().decode(Invoice.self, from: data) else { return Invoice() }
         return inv
     }

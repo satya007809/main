@@ -1,5 +1,6 @@
 import SwiftUI
 
+@MainActor
 struct InventoryView: View {
     let model: CaseModel
     @State private var filter = "all"

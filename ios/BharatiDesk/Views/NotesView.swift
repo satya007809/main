@@ -26,7 +26,10 @@ struct NotesView: View {
                     }
                     .buttonStyle(.plain)
                 }
-                .onDelete { idx in Task { for i in idx { await delete(model.notes[i]) } } }
+                .onDelete { idx in
+                    let targets = idx.map { model.notes[$0] }   // capture before reloads shift indices
+                    Task { for n in targets { await delete(n) } }
+                }
             } footer: {
                 Text("After adding verification results, rerun the investigation so the findings and report use them.")
             }
@@ -62,6 +65,7 @@ struct NoteRowContent: View {
     }
 }
 
+@MainActor
 struct NoteEditor: View {
     let model: CaseModel
     let existing: CaseNote?

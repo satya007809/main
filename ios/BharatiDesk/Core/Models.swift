@@ -387,6 +387,13 @@ struct AuditEntry: Codable, Hashable { let at: String; let action: String }
 
 extension String {
     var humanized: String { replacingOccurrences(of: "_", with: " ").capitalized }
+    /// Undoes `.convertFromSnakeCase`, which JSONDecoder also applies to `[String: _]` dictionary keys
+    /// ("reports_ready" arrives as "reportsReady").
+    var snakeCased: String {
+        reduce(into: "") { out, ch in
+            if ch.isUppercase { out += "_" + ch.lowercased() } else { out.append(ch) }
+        }
+    }
     /// "2026-03-14T10:22:01.123" -> "14 Mar 2026"
     var shortDate: String {
         let f = ISO8601DateFormatter(); f.formatOptions = [.withFullDate]

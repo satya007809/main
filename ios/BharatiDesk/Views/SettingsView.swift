@@ -1,6 +1,7 @@
 import SwiftUI
 import UniformTypeIdentifiers
 
+@MainActor
 struct SettingsView: View {
     @Environment(AppSession.self) private var session
     @Environment(\.dismiss) private var dismiss
@@ -75,7 +76,10 @@ struct SettingsView: View {
             .toolbar { ToolbarItem(placement: .confirmationAction) { Button("Done") { dismiss() } } }
             .task {
                 lock = session.appLockEnabled
-                profile = session.user?.investigatorProfile ?? [:]
+                // .convertFromSnakeCase also rewrites dictionary keys ("licence_number" -> "licenceNumber"); undo that
+                // so the fields below (keyed by the server's snake_case names) find their values.
+                profile = Dictionary((session.user?.investigatorProfile ?? [:]).map { ($0.key.snakeCased, $0.value) },
+                                     uniquingKeysWith: { a, _ in a })
                 connectors = (try? await APIClient.shared.request("GET", "connectors")) ?? []
             }
         }

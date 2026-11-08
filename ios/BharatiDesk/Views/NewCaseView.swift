@@ -1,6 +1,7 @@
 import SwiftUI
 
 /// Dashboard → New Investigation → Case details → Folder link → Case type → (Create & scan)
+@MainActor
 struct NewCaseView: View {
     var onCreated: (CaseRecord) -> Void
     @Environment(\.dismiss) private var dismiss
@@ -146,7 +147,8 @@ struct ReportOptionsSection: View {
                 }
                 .onDelete { input.invoice.items.remove(atOffsets: $0) }
                 Button("Add invoice line") { input.invoice.items.append(InvoiceItem(description: "Investigation fee", amount: 0)) }
-                TextField("GST %", value: $input.invoice.gstPercent, format: .number).keyboardType(.decimalPad)
+                TextField("GST %", value: Binding(get: { input.invoice.gstPercent ?? 0 }, set: { input.invoice.gstPercent = $0 }),
+                          format: .number).keyboardType(.decimalPad)
             }
         } header: { Text("Report") } footer: {
             Text("Default 7 pages; select up to 10 for complex cases. Invoice amounts are never filled in automatically.")

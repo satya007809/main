@@ -25,6 +25,7 @@ enum CaseGroup: String, CaseIterable, Identifiable {
     }
 }
 
+@MainActor
 struct DashboardView: View {
     @Environment(OfflineStore.self) private var offline
     @State private var cases: [CaseRecord] = []
@@ -101,11 +102,13 @@ struct DashboardView: View {
         if group != .all { q.append(.init(name: "group", value: group.rawValue)) }
         if !search.isEmpty { q.append(.init(name: "q", value: search)) }
         let cacheName = "cases_\(group.rawValue).json"
+        let query = q
         do {
-            async let list: [CaseRecord] = APIClient.shared.request("GET", "cases", query: q)
+            async let list: [CaseRecord] = APIClient.shared.request("GET", "cases", query: query)
             async let dash: Dashboard = APIClient.shared.request("GET", "dashboard")
             cases = try await list
-            counts = try await dash.groups
+            let groups = try await dash.groups
+            counts = Dictionary(groups.map { ($0.key.snakeCased, $0.value) }, uniquingKeysWith: +)
             error = nil
             if search.isEmpty { offline.cache(cases, as: cacheName); offline.cache(counts, as: "dashboard.json") }
         } catch {

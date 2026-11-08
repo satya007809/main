@@ -39,8 +39,8 @@ final class OfflineStore {
         pendingNotes = load("outbox_notes.json") ?? [:]
         pendingUploads = load("outbox_uploads.json") ?? []
         monitor.pathUpdateHandler = { [weak self] path in
+            guard let self else { return }
             Task { @MainActor in
-                guard let self else { return }
                 let was = self.isOnline
                 self.isOnline = path.status == .satisfied
                 if self.isOnline && !was { await self.sync() }
