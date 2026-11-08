@@ -9,4 +9,5 @@ COPY . .
 RUN useradd -m bid && mkdir -p /var/lib/bharati/storage && chown -R bid /var/lib/bharati
 USER bid
 EXPOSE 8000
-CMD ["sh", "-c", "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000 --proxy-headers"]
+ENV BID_STORAGE_DIR=/var/lib/bharati/storage
+CMD ["sh", "-c", "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000} --proxy-headers --forwarded-allow-ips='*'"]

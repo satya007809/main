@@ -1,7 +1,9 @@
 """Application configuration. All secrets come from environment variables (see .env.example)."""
 from functools import lru_cache
 
-from pydantic import Field
+import os
+
+from pydantic import Field, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -9,7 +11,8 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", env_prefix="BID_", extra="ignore")
 
     environment: str = "development"  # development | production | test
-    database_url: str = "sqlite:///./bharati_dev.db"
+    # Falls back to DATABASE_URL (set automatically by Railway/Render/Heroku Postgres add-ons)
+    database_url: str = Field(default_factory=lambda: os.environ.get("DATABASE_URL", "sqlite:///./bharati_dev.db"))
     public_base_url: str = "http://localhost:8000"  # used to build OAuth redirect URIs
     ios_callback_scheme: str = "bharatidesk"
 
@@ -61,6 +64,24 @@ class Settings(BaseSettings):
     # Reports
     soffice_path: str = "soffice"
     words_per_page: int = 300  # Times New Roman 13pt, 1.5 spacing, A4, normal margins
+
+
+    @field_validator("database_url")
+    @classmethod
+    def _driver(cls, v: str) -> str:
+        for prefix in ("postgres://", "postgresql://"):
+            if v.startswith(prefix):
+                return "postgresql+psycopg://" + v[len(prefix):]
+        return v
+
+    @field_validator("public_base_url", mode="before")
+    @classmethod
+    def _public_url(cls, v):
+        # Railway exposes the generated domain as RAILWAY_PUBLIC_DOMAIN
+        dom = os.environ.get("RAILWAY_PUBLIC_DOMAIN")
+        if (not v or v == "http://localhost:8000") and dom:
+            return f"https://{dom}"
+        return v
 
 
 @lru_cache

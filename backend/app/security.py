@@ -65,7 +65,13 @@ def _fernet() -> Fernet:
             raise RuntimeError("BID_DATA_ENCRYPTION_KEY must be set in production")
         # Deterministic dev key derived from the JWT secret so local data stays readable between restarts.
         key = base64.urlsafe_b64encode(hashlib.sha256(("dev:" + get_settings().jwt_secret).encode()).digest()).decode()
-    return Fernet(key.encode() if isinstance(key, str) else key)
+    try:
+        return Fernet(key.encode() if isinstance(key, str) else key)
+    except ValueError:
+        # Any long random passphrase (e.g. Railway's ${{secret()}}) is accepted and stretched into a Fernet key.
+        if len(key) < 32:
+            raise RuntimeError("BID_DATA_ENCRYPTION_KEY must be at least 32 characters")
+        return Fernet(base64.urlsafe_b64encode(hashlib.sha256(("bid-key:" + key).encode()).digest()))
 
 
 def encrypt_bytes(data: bytes) -> bytes:
