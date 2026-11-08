@@ -24,11 +24,57 @@ jobs:
       - uses: actions/checkout@v4
       - run: brew install xcodegen
       - run: xcodegen generate
+      - name: Compile app and tests (generic simulator, no device needed)
+        run: |
+          set -o pipefail
+          xcodebuild build-for-testing -project BharatiDesk.xcodeproj -scheme BharatiDesk \
+            -destination 'generic/platform=iOS Simulator' -derivedDataPath build/dd \
+            CODE_SIGNING_ALLOWED=NO | tail -n 120
+      - name: Run unit tests on a compatible simulator
+        run: |
+          set -o pipefail
+          # Ask Xcode which simulators work with this scheme (runner images differ).
+          DEST=$(xcodebuild -showdestinations -project BharatiDesk.xcodeproj -scheme BharatiDesk 2>/dev/null \
+            | grep "platform:iOS Simulator" | grep "name:iPhone" | grep -v placeholder \
+            | sed -E 's/.*id:([^,]+),.*/\1/' | head -n1)
+          if [ -z "$DEST" ]; then echo "::warning::No iPhone simulator available on this runner; tests skipped (app compiled)"; exit 0; fi
+          echo "Using simulator $DEST"
+          xcodebuild test-without-building -project BharatiDesk.xcodeproj -scheme BharatiDesk \
+            -destination "id=$DEST" -derivedDataPath build/dd CODE_SIGNING_ALLOWED=NO | tail -n 80
+
+  testflight:
+        description: "Upload a new build to TestFlight"
+        type: boolean
+        default: true
+
+jobs:
+  build-and-test:
+    runs-on: macos-15
+    defaults:
+      run:
+        working-directory: ios
+    steps:
+      - uses: actions/checkout@v4
+      - run: brew install xcodegen
+      - run: xcodegen generate
       - name: Build and unit-test on simulator
         run: |
           set -o pipefail
+          # Runner images differ in which simulators exist: pick any available iPhone simulator.
+          DEST=$(xcrun simctl list devices available -j | python3 -c '
+          import json, sys
+          devs = json.load(sys.stdin)["devices"]
+          ids = [d["udid"] for rt, ds in sorted(devs.items(), reverse=True) if "iOS" in rt
+                 for d in ds if d.get("isAvailable") and d["name"].startswith("iPhone")]
+          print(ids[0] if ids else "")')
+          if [ -z "$DEST" ]; then
+            RT=$(xcrun simctl list runtimes -j | python3 -c 'import json,sys; r=[x["identifier"] for x in json.load(sys.stdin)["runtimes"] if x["platform"]=="iOS" and x["isAvailable"]]; print(r[-1] if r else "")')
+            DT=$(xcrun simctl list devicetypes -j | python3 -c 'import json,sys; t=[x["identifier"] for x in json.load(sys.stdin)["devicetypes"] if x["name"].startswith("iPhone")]; print(t[-1])')
+            DEST=$(xcrun simctl create "CI iPhone" "$DT" "$RT")
+          fi
+          echo "Using simulator $DEST"
           xcodebuild test -project BharatiDesk.xcodeproj -scheme BharatiDesk \
-            -destination 'platform=iOS Simulator,name=iPhone 16' CODE_SIGNING_ALLOWED=NO | tail -n 80
+            -destination "id=$DEST" CODE_SIGNING_ALLOWED=NO | tail -n 80
 
   testflight:
     if: github.event_name == 'workflow_dispatch' && inputs.testflight
