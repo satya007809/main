@@ -1,0 +1,32 @@
+key: road_accident
+name: Road Accident (Verification of Incident)
+kind: category
+report_template: general
+related_aspects: [own_damage, pa_injury, pa_death, hire_and_reward, policy_breach]
+objective: Verify that the road accident occurred as alleged and establish the driver, occupants, location, route and mechanism.
+document_checklist:
+  - {id: fir, label: FIR / police papers, doc_types: [fir, police_report], required: true}
+  - {id: statements, label: Statements of driver, occupants, witnesses, doc_types: [witness_statement], required: true}
+  - {id: photos, label: Spot and vehicle photographs, doc_types: [photograph], required: true}
+  - {id: medical, label: Medical / MLC records of injured, doc_types: [mlc, medical_record, discharge_summary], required: false}
+  - {id: mvi, label: MVI report, doc_types: [mvi_report], required: false}
+  - {id: dl, label: Driving licence, doc_types: [driving_licence], required: true}
+  - {id: rc, label: Registration certificate, doc_types: [registration_certificate], required: true}
+  - {id: gps, label: GPS / Timeline / FASTag, doc_types: [google_timeline, fastag_statement], required: false}
+investigation_questions:
+  - Did the accident occur at the stated date, time and place? Which sources independently support it?
+  - Who was driving and who were the occupants? Any substitution of driver between FIR, MLC and statements?
+  - What was the route and purpose of the journey?
+  - Is the vehicle damage and injury pattern consistent with the alleged mechanism?
+  - Delay in FIR registration and its explanation.
+evidence_verification:
+  - Cross-check FIR particulars with MLC/hospital entries (time of arrival, history given, brought by).
+  - Compare MVI findings with photographs and reported mechanism.
+chronology_checks:
+  - Accident time, FIR time, hospital arrival time, MLC time; flag gaps.
+policy_verification:
+  - Driver licence and vehicle use against policy conditions.
+red_flags_to_examine:
+  - Delayed FIR with changed narrative; driver name added later; hospital history differs from FIR.
+report_instructions:
+  - Conclude clearly whether the accident as alleged is established, not established, or unverifiable on present evidence.

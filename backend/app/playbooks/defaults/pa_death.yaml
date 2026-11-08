@@ -1,0 +1,29 @@
+key: pa_death
+name: Personal Accident - Death
+kind: category
+report_template: pa_death
+related_aspects: [road_accident, policy_breach]
+objective: Establish the actual cause of death and whether death resulted solely and directly from a covered accident.
+document_checklist:
+  - {id: policy, label: PA policy schedule and wording, doc_types: [policy_schedule, policy_wording], required: true}
+  - {id: claim_form, label: Claim form, doc_types: [claim_form], required: true}
+  - {id: fir, label: FIR / inquest / final report, doc_types: [fir, police_report], required: true}
+  - {id: pm, label: Postmortem report (and viscera / FSL report if any), doc_types: [postmortem_report], required: true}
+  - {id: death_cert, label: Death certificate, doc_types: [death_certificate], required: true}
+  - {id: hospital, label: Hospital / MLC / treatment records, doc_types: [mlc, medical_record, discharge_summary], required: false}
+  - {id: id_docs, label: Identity and nominee documents, doc_types: [identity_document], required: true}
+investigation_questions:
+  - What was the actual cause of death per postmortem, and is it consistent with the alleged accident?
+  - What is the chronology from accident to treatment to death? Any intervening illness or cause?
+  - Do FIR, inquest, MLC, PM and death certificate agree on date, time, place and manner of death?
+  - Is there evidence of disease, intoxication (viscera), suicide, homicide or other excluded cause?
+  - Was the deceased the insured life, and is identity established across documents?
+evidence_verification:
+  - Compare PM opinion on cause of death with the hospital diagnosis and police version.
+  - Check whether viscera/FSL results are awaited; if so the cause of death may be pending.
+chronology_checks:
+  - Accident -> hospital arrival -> MLC -> treatment -> death -> inquest -> PM -> death registration.
+policy_verification:
+  - Definition of accidental death; time limit between accident and death; exclusions (intoxication, suicide, disease, criminal act).
+report_instructions:
+  - State clearly whether death is causally connected to a covered accident, not connected, or not determinable on present evidence.

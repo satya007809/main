@@ -1,0 +1,31 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: bid
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD}
+      POSTGRES_DB: bharati
+    volumes: [pgdata:/var/lib/postgresql/data]
+    restart: unless-stopped
+  api:
+    build: .
+    env_file: .env
+    environment:
+      BID_DATABASE_URL: postgresql+psycopg://bid:${POSTGRES_PASSWORD}@db:5432/bharati
+      BID_RUN_WORKER_IN_PROCESS: "false"
+    volumes: [storage:/var/lib/bharati/storage]
+    depends_on: [db]
+    ports: ["127.0.0.1:8000:8000"]   # expose through an HTTPS reverse proxy (Caddy / nginx), never plain HTTP
+    restart: unless-stopped
+  worker:
+    build: .
+    env_file: .env
+    environment:
+      BID_DATABASE_URL: postgresql+psycopg://bid:${POSTGRES_PASSWORD}@db:5432/bharati
+    command: ["python", "-m", "app.worker"]
+    volumes: [storage:/var/lib/bharati/storage]
+    depends_on: [db, api]
+    restart: unless-stopped
+volumes:
+  pgdata:
+  storage:

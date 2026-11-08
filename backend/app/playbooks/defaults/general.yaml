@@ -1,0 +1,13 @@
+key: general
+name: Other / Special Investigation
+kind: category
+report_template: general
+related_aspects: [road_accident, hire_and_reward, close_proximity, vehicle_modification, policy_breach]
+objective: Investigate the specific allegation or query raised by the insurer and establish the facts from evidence.
+document_checklist:
+  - {id: appointment, label: Appointment letter / scope from insurer, doc_types: [unknown], required: false}
+  - {id: policy, label: Policy schedule and wording, doc_types: [policy_schedule, policy_wording], required: true}
+investigation_questions:
+  - What exact question does the insurer need answered? Answer it directly with evidence.
+report_instructions:
+  - Keep the structure: background, investigation carried out, findings, discrepancies, pending verifications, opinion.

@@ -1,0 +1,21 @@
+key: close_proximity
+name: Close Proximity Claim
+kind: aspect
+report_template: general
+objective: For losses shortly after policy inception, determine whether the loss pre-dated the policy or the insurance was taken after the loss.
+document_checklist:
+  - {id: policy, label: Current policy with issuance date/time, doc_types: [policy_schedule], required: true}
+  - {id: prev_policy, label: Previous policy, doc_types: [previous_policy, policy_schedule], required: true}
+  - {id: inspection, label: Pre-inspection report / photos, doc_types: [survey_report, photograph], required: false}
+  - {id: rc, label: RC including transfer of ownership dates, doc_types: [registration_certificate], required: true}
+  - {id: photos, label: Photographs with metadata, doc_types: [photograph], required: true}
+investigation_questions:
+  - Exact policy issuance date and time vs accident date and time; was there a break-in and was pre-inspection required and done?
+  - Was ownership transferred recently, and was the policy transferred correctly?
+  - Is there any evidence that the damage existed before inception (photo metadata, earlier garage records, chats, witness accounts)?
+chronology_checks:
+  - Previous expiry -> break -> inspection -> issuance -> accident -> intimation -> garage entry.
+policy_verification:
+  - Break-in / pre-inspection conditions and the effective start time on the schedule.
+report_instructions:
+  - Present a precise timeline table and state whether pre-existing loss is established, ruled out, or unresolved.

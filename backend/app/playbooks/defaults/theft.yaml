@@ -1,0 +1,27 @@
+key: theft
+name: Vehicle Theft
+kind: category
+report_template: theft
+related_aspects: [policy_breach, hire_and_reward]
+objective: Verify that the vehicle was stolen as reported, examine insured conduct and delay, and establish admissibility.
+document_checklist:
+  - {id: policy, label: Policy schedule, doc_types: [policy_schedule], required: true}
+  - {id: fir, label: FIR, doc_types: [fir], required: true}
+  - {id: final_report, label: Police final / untraced report, doc_types: [police_report], required: false}
+  - {id: rc, label: RC and ownership / finance documents, doc_types: [registration_certificate], required: true}
+  - {id: keys, label: Statement on keys (number of keys and their custody), doc_types: [witness_statement, claim_form], required: true}
+  - {id: statements, label: Insured / driver / watchman statements, doc_types: [witness_statement], required: true}
+  - {id: cctv, label: CCTV / parking records, doc_types: [cctv_record, photograph], required: false}
+  - {id: gps, label: GPS / FASTag after theft, doc_types: [google_timeline, fastag_statement], required: false}
+investigation_questions:
+  - Date, time and location of theft; when the vehicle was last seen and by whom.
+  - Parking circumstances and security; were keys left in the vehicle; how many keys exist and were all produced?
+  - Delay between discovery, police intimation, FIR and insurer intimation, and the explanation.
+  - Police investigation status; any recovery, sale or use of the vehicle after the alleged theft (FASTag/challans)?
+  - Financial position of the insured, loan arrears, disputes, prior attempts to sell.
+chronology_checks:
+  - Last seen -> discovery -> police intimation -> FIR -> insurer intimation -> final report.
+policy_verification:
+  - Conditions on reasonable care, immediate intimation to police and insurer, and keys.
+report_instructions:
+  - State whether the theft is established as genuine, doubtful with specific reasons, or a breach (e.g. delayed intimation, keys) is established.

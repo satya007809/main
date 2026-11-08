@@ -1,0 +1,23 @@
+key: hire_and_reward
+name: Hire and Reward Allegation
+kind: aspect
+report_template: general
+objective: Determine whether a private / non-permitted vehicle was being used for hire or reward at the time of loss, and whether that use breaches the policy.
+document_checklist:
+  - {id: statements, label: Passenger / driver / owner statements, doc_types: [witness_statement], required: true}
+  - {id: permit, label: Permit and RC (class of vehicle), doc_types: [permit, registration_certificate], required: true}
+  - {id: payments, label: Payment evidence (UPI, bank, cash receipts), doc_types: [bank_statement, invoice], required: false}
+  - {id: bookings, label: Booking / trip records (apps, WhatsApp), doc_types: [whatsapp_export], required: false}
+  - {id: policy, label: Policy schedule and limitations as to use, doc_types: [policy_schedule, policy_wording], required: true}
+investigation_questions:
+  - Who were the occupants, what was their relationship with the owner/driver, and why were they travelling?
+  - Is there evidence of fare/payment, booking, a route typical of commercial trips, or regular commercial use?
+  - What is the vehicle's registered class and permit; what does the "limitations as to use" clause permit?
+evidence_verification:
+  - Corroborate passenger statements with independent evidence (payments, chats, booking records).
+policy_verification:
+  - Quote the exact "Limitations as to use" clause and any relevant endorsement before concluding a breach.
+red_flags_to_examine:
+  - Unrelated passengers, multiple strangers, luggage of travellers, payments to driver/owner, app-based booking traces.
+report_instructions:
+  - State whether hire-and-reward use is established, not established, or unproven, and the evidence for that conclusion. A suspicion alone is not a breach.

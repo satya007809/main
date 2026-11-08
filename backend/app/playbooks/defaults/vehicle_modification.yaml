@@ -1,0 +1,18 @@
+key: vehicle_modification
+name: Vehicle Modification
+kind: aspect
+report_template: general
+objective: Compare the original factory variant and fitments with the vehicle's actual condition at the time of loss, and assess relevance to the loss and policy.
+document_checklist:
+  - {id: rc, label: RC (variant, body type, fuel), doc_types: [registration_certificate], required: true}
+  - {id: invoices, label: Purchase and accessory/modification invoices, doc_types: [invoice], required: false}
+  - {id: photos, label: Photographs showing modifications, doc_types: [photograph], required: true}
+  - {id: policy, label: Policy schedule (declared accessories / CNG / endorsements), doc_types: [policy_schedule], required: true}
+investigation_questions:
+  - What modifications exist (engine, body, CNG/LPG kit, lighting, wheels, electrical) and when were they fitted?
+  - Were they declared to the insurer / endorsed on RC and policy?
+  - Did any modification cause or contribute to the loss?
+policy_verification:
+  - Quote clauses on non-declared accessories, alterations and use; distinguish non-disclosure from causation.
+report_instructions:
+  - Tabulate original vs actual fitment with source of each.

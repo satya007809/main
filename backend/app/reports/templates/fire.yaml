@@ -1,0 +1,14 @@
+key: fire
+title: INVESTIGATION REPORT – FIRE CLAIM
+format: {font: Times New Roman, size: 13, line_spacing: 1.5}
+sections:
+  - {key: introduction, heading: "1. Introduction", guidance: "Appointment, claim reference and scope."}
+  - {key: incident_reported, heading: "2. Background / Incident as Reported", guidance: "The claimant's version and the insurer's query."}
+  - {key: investigation, heading: "3. Investigation Carried Out", guidance: "Evidence examined; only record visits/calls present in investigator notes."}
+  - {key: chronology, heading: "4. Chronology of Events", table: chronology, drafted: false}
+  - {key: findings, heading: "5. Findings", guidance: "Point of origin and probable cause with the supporting evidence (fire report, photographs, technical observations, statements); distinguish observation from inference."}
+  - {key: discrepancies, heading: "6. Discrepancies Observed", table: discrepancies, drafted: false}
+  - {key: policy, heading: "7. Policy Position", guidance: "Relevant clauses quoted with application; provisional if wording absent."}
+  - {key: pending, heading: "8. Pending Verifications", table: pending, drafted: false}
+  - {key: opinion, heading: "9. Conclusion and Opinion", guidance: "Direct opinion, decisive evidence, limitations.", opinion: true}
+  - {key: documents, heading: "Annexure – Documents Examined", table: documents, drafted: false}

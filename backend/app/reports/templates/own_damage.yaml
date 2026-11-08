@@ -1,0 +1,14 @@
+key: own_damage
+title: INVESTIGATION REPORT – MOTOR OWN DAMAGE CLAIM
+format: {font: Times New Roman, size: 13, line_spacing: 1.5}
+sections:
+  - {key: introduction, heading: "1. Introduction", guidance: "Appointment by the insurer, claim reference and scope of investigation in 2-3 sentences."}
+  - {key: incident_reported, heading: "2. Brief of the Incident as Reported", guidance: "The insured/driver's version: date, time, place, how the accident occurred, driver, occupants, journey purpose."}
+  - {key: investigation, heading: "3. Investigation Carried Out", guidance: "What was examined (documents, photographs, spot/garage observations from investigator notes, statements). Do not claim any visit or call not recorded in investigator notes."}
+  - {key: chronology, heading: "4. Chronology of Events", table: chronology, drafted: false}
+  - {key: findings, heading: "5. Findings", guidance: "Established date/time/place/cause, driver and licence, journey purpose, damage consistency, pre-existing damage, policy inception/continuity, garage entry, towing, GPS/FASTag where supplied. Separate verified facts from statements and inferences."}
+  - {key: discrepancies, heading: "6. Discrepancies Observed", table: discrepancies, drafted: false}
+  - {key: policy, heading: "7. Policy Verification", guidance: "Policy period, IDV/endorsements and the exact clauses relevant to the facts, quoted, with their application. Mark as provisional if wording not supplied."}
+  - {key: pending, heading: "8. Pending Verifications", table: pending, drafted: false}
+  - {key: opinion, heading: "9. Conclusion and Opinion", guidance: "Direct opinion matching the verdict, the decisive evidence, and brief limitations.", opinion: true}
+  - {key: documents, heading: "Annexure – Documents Examined", table: documents, drafted: false}

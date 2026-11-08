@@ -1,0 +1,13 @@
+key: policy_breach
+name: Policy Breach Examination
+kind: aspect
+report_template: general
+objective: Examine whether a specific policy condition or exclusion was breached on the established facts.
+investigation_questions:
+  - Which condition/exclusion is in question? Quote it exactly from the supplied wording.
+  - Which verified facts engage the clause, and is causation/nexus required by the clause wording?
+  - Is the breach established on evidence, or only suspected?
+policy_verification:
+  - Cite clause numbers and quote operative words from the supplied policy documents only.
+report_instructions:
+  - If the wording is not in the folder, mark the coverage conclusion as provisional and list the wording as pending.

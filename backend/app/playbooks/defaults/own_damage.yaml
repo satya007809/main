@@ -1,0 +1,62 @@
+key: own_damage
+name: Motor Own Damage (OD)
+kind: category
+report_template: own_damage
+related_aspects: [road_accident, hire_and_reward, close_proximity, vehicle_modification, policy_breach]
+objective: >
+  Establish whether the reported own-damage accident occurred as stated (date, time, place, cause, driver and
+  circumstances), whether the damage is consistent with it, and whether the loss is admissible under the policy.
+document_checklist:
+  - {id: policy_schedule, label: Current policy schedule with endorsements, doc_types: [policy_schedule], required: true}
+  - {id: policy_wording, label: Policy wording / terms, doc_types: [policy_wording], required: false}
+  - {id: previous_policy, label: Previous policy (continuity / NCB), doc_types: [previous_policy, policy_schedule], required: true}
+  - {id: claim_form, label: Claim form / intimation, doc_types: [claim_form], required: true}
+  - {id: rc, label: Registration certificate, doc_types: [registration_certificate], required: true}
+  - {id: dl, label: Driver's driving licence, doc_types: [driving_licence], required: true}
+  - {id: permit_fitness, label: Permit and fitness (commercial vehicles), doc_types: [permit, fitness_certificate], required: false}
+  - {id: photos, label: Accident / damage / spot photographs, doc_types: [photograph], required: true}
+  - {id: police, label: FIR / police intimation / panchnama (if reported), doc_types: [fir, police_report], required: false}
+  - {id: job_card, label: Garage job card / estimate / entry date, doc_types: [garage_job_card], required: true}
+  - {id: towing, label: Towing bill, doc_types: [towing_bill], required: false}
+  - {id: survey, label: Surveyor report, doc_types: [survey_report], required: false}
+  - {id: driver_statement, label: Driver / insured statement, doc_types: [witness_statement, claim_form], required: true}
+  - {id: gps, label: GPS / Google Timeline, doc_types: [google_timeline], required: false}
+  - {id: fastag, label: FASTag statement, doc_types: [fastag_statement], required: false}
+investigation_questions:
+  - What are the exact date, time and location of the accident according to each source, and do they agree?
+  - What was the cause and manner of the accident (collision with what, skid, fall, self-accident, third party)?
+  - Who was driving? Is the driver identity consistent across claim form, statements, photographs and police papers? Did the driver hold a valid and effective licence for the class of vehicle on the accident date?
+  - What was the purpose of the journey, origin and destination, and who were the occupants?
+  - Is the damage pattern (location, direction, height, severity) consistent with the stated accident mechanism and location?
+  - Is there evidence of pre-existing, old or unrelated damage (rust, dust in damaged areas, earlier repairs, photos dated before inception)?
+  - When was the policy incepted relative to the accident? Was there a break in insurance or change of insurer/ownership? Was pre-inspection required and done?
+  - When did the vehicle reach the garage (job card entry date/time) and does this align with the accident time and towing records?
+  - Do GPS/Timeline/FASTag records (if supplied) place the vehicle on the stated route at the stated time?
+  - Was the vehicle being used in accordance with the policy (private vs commercial use, permit, seating, load)?
+evidence_verification:
+  - Compare RC particulars (owner, registration, chassis, engine, class, fuel) with the policy schedule.
+  - Verify DL validity dates and authorised classes against the vehicle class on the accident date.
+  - Check photograph EXIF date/time/GPS against the stated accident date/place; note photos that predate the accident or policy.
+  - Compare job card entry date, odometer and repair list with the reported damage.
+  - Check towing bill time and pick-up location against the stated accident spot.
+  - Check FIR/police papers (if any) for date, time, place, vehicles involved and driver name.
+chronology_checks:
+  - Policy inception vs accident date (flag accidents within 30 days of inception for close-proximity examination).
+  - Accident time vs intimation time vs garage entry vs survey date; explain any unexplained delay.
+  - Previous policy expiry vs current inception (break-in).
+policy_verification:
+  - Insured and vehicle details match RC; policy period covers the accident date and time.
+  - Limitations as to use clause; driver clause; geographical area; endorsements (e.g. IMT endorsements); add-ons (zero dep, RTI, engine protect).
+  - Exclusions relevant to the facts (unlicensed driver, drunken driving, use other than permitted, consequential/mechanical breakdown, wear and tear).
+red_flags_to_examine:
+  - Accident shortly after inception or after a break in insurance.
+  - Night-time single-vehicle accidents with no independent witness or police record.
+  - Driver changed between documents; driver without valid licence.
+  - Damage inconsistent with stated mechanism; old damage; damage to parts unrelated to impact direction.
+  - Garage entry before the stated accident time, or long unexplained delay.
+  - Photos with EXIF dates inconsistent with the stated incident.
+report_instructions:
+  - Narrate the incident as reported, then the investigation carried out and evidence examined, then findings.
+  - In findings, state the established date/time/place/cause, driver, journey purpose, damage consistency and policy position, citing sources.
+  - Tabulate discrepancies (point, version A with source, version B with source, significance).
+  - List pending verifications that could change the conclusion.

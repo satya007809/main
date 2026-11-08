@@ -1,0 +1,30 @@
+key: pa_injury
+name: Personal Accident - Injury / Disability
+kind: category
+report_template: pa_injury
+related_aspects: [road_accident, policy_breach]
+objective: Verify the accident, the bodily injury, treatment and resulting disability or loss of income, and assess admissibility against the actual policy wording.
+document_checklist:
+  - {id: policy, label: PA policy schedule and wording, doc_types: [policy_schedule, policy_wording], required: true}
+  - {id: claim_form, label: Claim form, doc_types: [claim_form], required: true}
+  - {id: fir_mlc, label: FIR / MLC (where applicable), doc_types: [fir, mlc, police_report], required: false}
+  - {id: hospital, label: Hospital records, discharge summary, investigation reports, doc_types: [discharge_summary, medical_record], required: true}
+  - {id: disability, label: Disability certificate, doc_types: [medical_record], required: false}
+  - {id: employment, label: Employment proof, salary slips, attendance and leave records, doc_types: [salary_slip, attendance_record], required: false}
+  - {id: id_docs, label: Identity documents, doc_types: [identity_document], required: true}
+investigation_questions:
+  - Did an accident (sudden, unforeseen, external, violent, visible) occur on the stated date and place?
+  - What injuries were sustained, when was treatment first sought, and is the treatment chronology consistent?
+  - Is the claimed disability (temporary/permanent, total/partial) supported by medical evidence and functional assessment?
+  - Employment, attendance, leave and salary records for the disability period; any work done during claimed disability?
+  - Pre-existing conditions or disease-related causes; other insurance covering the same loss.
+  - Availability of original documents.
+evidence_verification:
+  - Compare history recorded in hospital/MLC with the claim form version.
+  - Check attendance/leave records against claimed disability dates.
+chronology_checks:
+  - Accident -> first treatment -> admission -> discharge -> follow-up -> disability certification.
+policy_verification:
+  - Definitions of accident, injury, TTD/PPD/PTD; benefit tables; exclusions (intoxication, self-inflicted, pre-existing, adventure sports).
+report_instructions:
+  - Report treatment chronology in a table; state clearly whether accident, injury and claimed disability are established.

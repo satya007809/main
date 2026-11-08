@@ -1,0 +1,24 @@
+key: fire
+name: Fire Loss
+kind: category
+report_template: fire
+related_aspects: [policy_breach]
+objective: Establish the origin and probable cause of fire and the extent of loss attributable to it.
+document_checklist:
+  - {id: policy, label: Policy schedule and wording, doc_types: [policy_schedule, policy_wording], required: true}
+  - {id: fire_report, label: Fire department report, doc_types: [fire_report], required: true}
+  - {id: fir, label: FIR / police papers, doc_types: [fir, police_report], required: false}
+  - {id: photos, label: Photographs of the site / vehicle, doc_types: [photograph], required: true}
+  - {id: technical, label: Electrical / mechanical inspection findings, doc_types: [survey_report, mvi_report], required: false}
+  - {id: statements, label: Statements, doc_types: [witness_statement], required: true}
+investigation_questions:
+  - Where did the fire originate (point of origin) and what is the probable cause (electrical, mechanical, external, deliberate)?
+  - Who discovered the fire and when; how was it extinguished; response time of fire services?
+  - Are the burn patterns in the photographs consistent with the stated origin and cause?
+  - Any recent alterations, wiring work, CNG kits, fuel leaks or financial stress?
+chronology_checks:
+  - Discovery -> fire call -> arrival -> extinguished -> police -> insurer intimation.
+policy_verification:
+  - Perils covered and exclusions (wilful act, electrical/mechanical breakdown self-damage).
+report_instructions:
+  - Give a clear opinion on origin and cause with the evidence; distinguish technical observation from inference.
